@@ -3,7 +3,7 @@
 Building::Building()
 {
     display_code = 'B';
-    std::cout << "Building default constructed\n"
+    std::cout << "Building default constructed\n";
 }
 Building::Building(char in_code, int in_Id, Point2D in_loc)
 {

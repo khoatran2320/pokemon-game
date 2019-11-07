@@ -9,6 +9,7 @@ class GameObject{
     char state;
 
     public:
+    GameObject();
     GameObject(char in_code);
     GameObject(Point2D in_loc, int in_id, char in_code);
     Point2D GetLocation();

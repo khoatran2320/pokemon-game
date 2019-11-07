@@ -1,6 +1,10 @@
 #include <iostream>
 #include "GameObject.h"
 
+GameObject::GameObject()
+{
+    display_code = ' ';
+}
 GameObject::GameObject(char in_code)
 {
     display_code = in_code;

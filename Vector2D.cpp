@@ -40,16 +40,3 @@ Vector2D operator/(Vector2D &vector, double d)
         return newClass;
     }
 }
-
-int main()
-{
-    Vector2D v1;
-    Vector2D v2(4.0, 4.0);
-    Vector2D v3(1.0, 2.0);
-
-    v1 = v2 * 2.0;
-    cout << v1 << '\n';
-    v1 = v2 / 2.0;
-    cout << v1 << '\n';
-    return 0;
-}
