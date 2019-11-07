@@ -10,6 +10,7 @@ Building::Building(char in_code, int in_Id, Point2D in_loc)
     id_num = in_Id;
     location = in_loc;
     display_code = in_code;
+    std::cout << "Building constructed\n";
 }
 void Building::AddOnePokemon()
 {

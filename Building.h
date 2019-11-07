@@ -13,7 +13,7 @@ public:
     Building(char in_code, int in_Id, Point2D in_loc);
     void AddOnePokemon();
     void RemoveOnePokemon();
-    void ShowStatus();
+    virtual void ShowStatus();
     bool ShouldBeVisible();
 };
 #endif

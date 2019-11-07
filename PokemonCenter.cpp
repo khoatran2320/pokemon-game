@@ -70,7 +70,7 @@ unsigned int PokemonCenter::DistributeStamina(unsigned int points_needed)
 
 bool PokemonCenter::Update()
 {
-    if (num_stamina_points_remaining == 0)
+    if (num_stamina_points_remaining == 0 && state != NO_STAMINA_POINTS_AVAILABLE)
     {
         state = NO_STAMINA_POINTS_AVAILABLE;
         display_code = 'c';
@@ -86,7 +86,6 @@ void PokemonCenter::ShowStatus()
 {
     std::cout << "Pokemon Center Status: ";
     Building::ShowStatus();
-    std::cout << '\n';
     std::cout << "Pokemon dollars per stamina point: " << dollar_cost_per_stamina_point << '\n';
     std::cout << "Has " << num_stamina_points_remaining << " stamina point(s) remaining.\n";
 }
