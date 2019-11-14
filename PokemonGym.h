@@ -1,14 +1,13 @@
 #ifndef POKEMONGYM_H
 #define POKEMONGYM_H
 #include "Building.h"
+enum PokemonGymStates
+{
+    NOT_BEATEN = 0,
+    BEATEN = 1
+};
 class PokemonGym : public Building
 {
-    enum PokemonGymStates
-    {
-        NOT_BEATEN = 0,
-        BEATEN = 1
-    };
-
 public:
     PokemonGym();
     PokemonGym(unsigned int max_training_units, unsigned int stamina_cost, double dollar_cost, unsigned int exp_points_per_unit, int in_id, Point2D in_loc);

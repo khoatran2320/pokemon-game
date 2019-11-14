@@ -34,5 +34,5 @@ char GameObject::GetState()
 }
 void GameObject::ShowStatus()
 {
-    std::cout << display_code << ": " << id_num << " at " << location << '\n';
+    std::cout << display_code << ": " << id_num << " at " << location;
 }

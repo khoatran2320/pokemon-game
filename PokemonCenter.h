@@ -2,14 +2,13 @@
 #define POKEMONCENTER_H
 #include "Building.h"
 #include <iostream>
+enum PokemonCenterStates
+{
+    STAMINA_POINTS_AVAILABLE = 0,
+    NO_STAMINA_POINTS_AVAILABLE = 1
+};
 class PokemonCenter : public Building
 {
-    enum PokemonCenterStates
-    {
-        STAMINA_POINTS_AVAILABLE = 0,
-        NO_STAMINA_POINTS_AVAILABLE = 1
-    };
-
 public:
     PokemonCenter();
     PokemonCenter(int in_id, double stamina_cost, unsigned int stamina_cap, Point2D in_loc);
