@@ -247,6 +247,9 @@ bool Pokemon::UpdateLocation()
     {
         location.x += delta.x;
         location.y += delta.y;
+        stamina--;
+        srand(time(NULL));
+        pokemon_dollars += rand() % 10 + 1;
         std::cout << display_code << ' ' << id_num << " : step...\n";
         return false;
     }
@@ -256,4 +259,9 @@ void Pokemon::SetupDestination(Point2D dest)
     Vector2D temp(dest.x - location.x, dest.y - location.y);
     delta = temp * (speed / GetDistanceBetween(dest, location));
     destination = dest;
+}
+
+Pokemon::~Pokemon()
+{
+    std::cout << "Pokemon destructed.\n";
 }

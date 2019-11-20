@@ -36,6 +36,7 @@ public:
     bool ShouldBeVisible();
     void ShowStatus();
     bool Update();
+    virtual ~Pokemon();
 
 protected:
     bool UpdateLocation();

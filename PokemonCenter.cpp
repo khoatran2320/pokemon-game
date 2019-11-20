@@ -89,3 +89,7 @@ void PokemonCenter::ShowStatus()
     std::cout << "Pokemon dollars per stamina point: " << dollar_cost_per_stamina_point << '\n';
     std::cout << "Has " << num_stamina_points_remaining << " stamina point(s) remaining.\n";
 }
+PokemonCenter::~PokemonCenter()
+{
+    std::cout << "PokemonCenter destructed.\n";
+}

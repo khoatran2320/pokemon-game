@@ -104,5 +104,8 @@ int main()
     std::cout << pokemonGym2.Update() << '\n';
     std::cout << pokemonGym2.IsBeaten() << '\n';
     pokemonGym2.ShowStatus();
+
+    //testing Pokemon
+
     return 0;
 }

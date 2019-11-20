@@ -96,3 +96,7 @@ void PokemonGym::ShowStatus()
     std::cout << "Experience points per training unit: " << experience_points_per_training_unit << '\n';
     std::cout << num_training_units_remaining << " training unit(s) are remaining for this gym" << '\n';
 }
+PokemonGym::~PokemonGym()
+{
+    std::cout << "PokemonGym destructed.\n";
+}
