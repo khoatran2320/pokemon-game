@@ -19,7 +19,23 @@ Model::Model()
     PokemonGym *pokemonGym1 = new PokemonGym(10, 1, 2, 3, 1, pokemonGym1InLocation);
     PokemonGym *pokemonGym2 = new PokemonGym(20, 5, 7.5, 8, 2, pokemonGym2InLocation);
     object_ptrs[0] = pokemon1;
+    object_ptrs[1] = pokemon2;
+    object_ptrs[2] = pokemonCenter1;
+    object_ptrs[3] = pokemonCenter2;
+    object_ptrs[4] = pokemonGym1;
+    object_ptrs[5] = pokemonGym2;
+
     pokemon_ptrs[0] = pokemon1;
+    pokemon_ptrs[1] = pokemon2;
+
+    center_ptrs[0] = pokemonCenter1;
+    center_ptrs[1] = pokemonCenter2;
+
+    gym_ptrs[0] = pokemonGym1;
+    gym_ptrs[1] = pokemonGym2;
 
     num_objects = 6;
+    num_pokemon = 2;
+    num_centers = 2;
+    num_gyms = 2;
 }
