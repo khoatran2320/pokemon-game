@@ -7,6 +7,7 @@
 #include "View.h"
 #include "Point2D.h"
 #include <string>
+#include <stdlib.h>
 class Model
 {
 public:

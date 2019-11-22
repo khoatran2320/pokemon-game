@@ -8,6 +8,7 @@
 #include "Vector2D.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
+#include <cstdlib>
 enum PokemonStates
 {
     STOPPED = 0,
@@ -20,7 +21,7 @@ enum PokemonStates
     TRAINING_IN_GYM = 7,
     RECOVERING_STAMINA = 8
 };
-class Pokemon : GameObject
+class Pokemon : public GameObject
 {
 public:
     Pokemon();
@@ -36,7 +37,8 @@ public:
     bool ShouldBeVisible();
     void ShowStatus();
     bool Update();
-    virtual ~Pokemon();
+    std::string GetPokemonName();
+    ~Pokemon();
 
 protected:
     bool UpdateLocation();

@@ -14,10 +14,7 @@ Point2D::Point2D(double in_x, double in_y)
     y = in_y;
 }
 
-double GetDistanceBetween(Point2D p1, Point2D p2)
-{
-    return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
-}
+
 
 ostream &operator<<(ostream &out, Point2D &point)
 {

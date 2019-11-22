@@ -19,6 +19,7 @@ public:
     unsigned int DistributeStamina(unsigned int points_needed);
     bool Update();
     void ShowStatus();
+    ~PokemonCenter();
 
 private:
     unsigned int stamina_capacity;

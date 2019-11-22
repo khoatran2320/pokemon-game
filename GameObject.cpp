@@ -36,3 +36,13 @@ void GameObject::ShowStatus()
 {
     std::cout << display_code << ": " << id_num << " at " << location;
 }
+
+GameObject::~GameObject()
+{
+    std::cout << "GameObject destructed.\n";
+}
+void GameObject::DrawSelf(char *ptr)
+{
+    *ptr = display_code;
+    *(ptr + 1) = id_num;
+}

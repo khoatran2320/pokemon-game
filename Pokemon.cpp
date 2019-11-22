@@ -265,3 +265,8 @@ Pokemon::~Pokemon()
 {
     std::cout << "Pokemon destructed.\n";
 }
+std::string Pokemon::GetPokemonName()
+{
+    return name;
+}
+
