@@ -12,17 +12,15 @@ PokemonGym::PokemonGym()
     std::cout << "PokemonGym default constructed\n";
 }
 
-PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cost, double dollar_cost, unsigned int exp_points_per_unit, int in_id, Point2D in_loc)
+PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cost, double dollar_cost, unsigned int exp_points_per_unit, int in_Id, Point2D in_loc) : Building('G', in_Id, in_loc)
 {
-    id_num = in_id;
+
     max_number_of_training_units = max_training_units;
     stamina_cost_per_training_unit = stamina_cost;
     dollar_cost_per_training_unit = dollar_cost;
-    location = in_loc;
-    display_code = 'G';
     state = NOT_BEATEN;
     num_training_units_remaining = max_number_of_training_units;
-    experience_points_per_training_unit = 2;
+    experience_points_per_training_unit = exp_points_per_unit;
     std::cout << "PokemonGym constructed\n";
 }
 double PokemonGym::GetDollarCost(unsigned int unit_qty)
@@ -90,11 +88,11 @@ void PokemonGym::ShowStatus()
 {
     std::cout << "Pokemon Gym Status: ";
     Building::ShowStatus();
-    std::cout << "Max number of training units: " << max_number_of_training_units << '\n';
-    std::cout << "Stamina cost per training unit: " << stamina_cost_per_training_unit << '\n';
-    std::cout << "Pokemon dollar per training unit: " << dollar_cost_per_training_unit << '\n';
-    std::cout << "Experience points per training unit: " << experience_points_per_training_unit << '\n';
-    std::cout << num_training_units_remaining << " training unit(s) are remaining for this gym" << '\n';
+    std::cout << "\tMax number of training units: " << max_number_of_training_units << '\n';
+    std::cout << "\tStamina cost per training unit: " << stamina_cost_per_training_unit << '\n';
+    std::cout << "\tPokemon dollar per training unit: " << dollar_cost_per_training_unit << '\n';
+    std::cout << "\tExperience points per training unit: " << experience_points_per_training_unit << '\n';
+    std::cout << '\t' << num_training_units_remaining << " training unit(s) are remaining for this gym" << '\n';
 }
 PokemonGym::~PokemonGym()
 {

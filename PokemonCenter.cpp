@@ -9,16 +9,13 @@ PokemonCenter::PokemonCenter()
     state = STAMINA_POINTS_AVAILABLE;
     std::cout << "PokemonCenter default constructed\n";
 }
-PokemonCenter::PokemonCenter(int in_id, double stamina_cost, unsigned int stamina_cap, Point2D in_loc)
+PokemonCenter::PokemonCenter(int in_id, double stamina_cost, unsigned int stamina_cap, Point2D in_loc) : Building('C', in_id, in_loc)
 {
-    id_num = in_id;
-    location = in_loc;
-    display_code = 'C';
     stamina_capacity = stamina_cap;
     num_stamina_points_remaining = stamina_capacity;
     dollar_cost_per_stamina_point = stamina_cost;
     state = STAMINA_POINTS_AVAILABLE;
-    std::cout << "PokemonCenter default constructed\n";
+    std::cout << "PokemonCenter constructed\n";
 }
 bool PokemonCenter::HasStaminaPoints()
 {
@@ -86,8 +83,8 @@ void PokemonCenter::ShowStatus()
 {
     std::cout << "Pokemon Center Status: ";
     Building::ShowStatus();
-    std::cout << "Pokemon dollars per stamina point: " << dollar_cost_per_stamina_point << '\n';
-    std::cout << "Has " << num_stamina_points_remaining << " stamina point(s) remaining.\n";
+    std::cout << "\tPokemon dollar cost per stamina point: " << dollar_cost_per_stamina_point << '\n';
+    std::cout << "\tHas " << num_stamina_points_remaining << " stamina point(s) remaining.\n";
 }
 PokemonCenter::~PokemonCenter()
 {

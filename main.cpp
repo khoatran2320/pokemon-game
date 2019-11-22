@@ -19,6 +19,9 @@ int main()
     Model model;
     GameCommand game_command;
     View view;
+    model.ShowStatus();
+    view.Clear();
+    view.Draw();
 
     int id1;
     int id2;

@@ -156,6 +156,7 @@ void Model::Display(View &view)
 }
 void Model::ShowStatus()
 {
+    std::cout << "Time: " << time << '\n';
     for (int i = 0; i < num_objects; i++)
     {
         object_ptrs[i]->ShowStatus();

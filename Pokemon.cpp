@@ -2,19 +2,22 @@
 Pokemon::Pokemon()
 {
     speed = 5;
+    stamina = 20;
     std::cout << "Pokemon default constructed.\n";
 }
 Pokemon::Pokemon(char in_code)
 {
     speed = 5;
     state = STOPPED;
+    stamina = 20;
     display_code = in_code;
     std::cout << "Pokemon constructed.\n";
 }
-Pokemon::Pokemon(std::string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc)
+Pokemon::Pokemon(std::string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) : GameObject(in_loc, in_id, in_code)
 {
     speed = in_speed;
     name = in_name;
+    stamina = 20;
     std::cout << "Pokemon constructed.\n";
 }
 void Pokemon::StartMoving(Point2D dest)
@@ -152,15 +155,15 @@ bool Pokemon::Update()
     {
     case STOPPED:
         std::cout << " stopped.\n";
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         return false;
     case MOVING:
         std::cout << " moving at a speed of " << speed << " to destination " << destination << " at each step of " << delta << '\n';
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         UpdateLocation();
         if (!GetDistanceBetween(location, destination))
         {
@@ -173,9 +176,9 @@ bool Pokemon::Update()
         }
     case MOVING_TO_CENTER:
         std::cout << " heading to Pokemon Center " << current_center->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         if (!GetDistanceBetween(location, destination))
         {
             state = IN_CENTER;
@@ -187,9 +190,9 @@ bool Pokemon::Update()
         }
     case MOVING_TO_GYM:
         std::cout << " heading to Pokemon Gym " << current_gym->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         if (!GetDistanceBetween(location, destination))
         {
             state = IN_GYM;
@@ -201,15 +204,15 @@ bool Pokemon::Update()
         }
     case IN_CENTER:
         std::cout << " inside Pokemon Center " << current_center->GetId() << '\n';
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         return false;
     case IN_GYM:
         std::cout << " inside Pokemon Gym " << current_gym->GetId() << '\n';
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         return false;
     case TRAINING_IN_GYM:
         std::cout << " training in Pokemon Gym " << current_gym->GetId() << '\n';
@@ -218,9 +221,9 @@ bool Pokemon::Update()
         experience_points += current_gym->TrainPokemon(training_units_to_buy);
         std::cout << "** " << name << " completed " << training_units_to_buy << " training unit(s)!**\n";
         std::cout << "** " << name << " gained " << current_gym->TrainPokemon(training_units_to_buy) << " experience point(s)! **\n";
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         state = IN_GYM;
         return true;
     case RECOVERING_STAMINA:
@@ -228,9 +231,9 @@ bool Pokemon::Update()
         stamina += current_center->DistributeStamina(stamina_points_to_buy);
         pokemon_dollars -= current_center->GetDollarCost(stamina_points_to_buy);
         std::cout << "** " << name << " recovered " << current_center->DistributeStamina(stamina_points_to_buy) << " stamina point(s)! **\n";
-        std::cout << "Stamina: " << stamina << '\n';
-        std::cout << "Pokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "Experience Points: " << experience_points << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
         state = IN_CENTER;
         return true;
     }
@@ -269,4 +272,3 @@ std::string Pokemon::GetPokemonName()
 {
     return name;
 }
-
