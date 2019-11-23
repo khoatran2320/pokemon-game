@@ -19,8 +19,9 @@ int main()
     Model model;
     GameCommand game_command;
     View view;
-    model.ShowStatus();
     view.Clear();
+    model.ShowStatus();
+    model.Display(view);
     view.Draw();
 
     int id1;
@@ -49,6 +50,7 @@ int main()
                 {
                     Point2D location(x, y);
                     game_command.DoMoveCommand(model, id1, location);
+                    view.Draw();
                     break;
                 }
                 else
@@ -107,6 +109,10 @@ int main()
                 }
             case 'v':
                 game_command.DoGoCommand(model, view);
+                view.Clear();
+                model.ShowStatus();
+                model.Display(view);
+                view.Draw();
                 break;
             case 'x':
                 int temp = 0;
@@ -119,6 +125,10 @@ int main()
                     else
                     {
                         game_command.DoRunCommand(model, view);
+                        view.Clear();
+                        model.ShowStatus();
+                        model.Display(view);
+                        view.Draw();
                         temp++;
                     }
                 }
@@ -129,12 +139,12 @@ int main()
     return 0;
 }
 
-double GetRandomAmountOfPokemonDollars()
-{
+// double GetRandomAmountOfPokemonDollars()
+// {
 
-    return rand() / (double)RAND_MAX / 2;
-}
-double GetDistanceBetween(Point2D p1, Point2D p2)
-{
-    return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
-}
+//     return rand() / (double)RAND_MAX / 2;
+// }
+// double GetDistanceBetween(Point2D p1, Point2D p2)
+// {
+//     return sqrt(pow((p1.x - p2.x), 2) + pow((p1.y - p2.y), 2));
+// }

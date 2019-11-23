@@ -13,6 +13,7 @@ bool View::GetSubscripts(int &out_x, int &out_y, Point2D location)
         return false;
     }
 }
+
 View::View()
 {
     size = 11;
@@ -39,7 +40,8 @@ void View::Plot(GameObject *ptr)
     int out_y = 0;
     if (GetSubscripts(out_x, out_y, ptr->GetLocation()))
     {
-        ptr->DrawSelf(&grid[out_x][out_y][0]);
+
+        ptr->DrawSelf(grid[out_x][out_y]);
     }
 }
 
@@ -48,73 +50,73 @@ void View::Draw()
     std::cout << 20;
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[0][i][0];
-        std::cout << grid[0][i][1];
+        std::cout << grid[i][10][0];
+        std::cout << grid[i][10][1];
     }
     std::cout << "\n  ";
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[1][i][0];
-        std::cout << grid[1][i][1];
+        std::cout << grid[i][9][0];
+        std::cout << grid[i][9][1];
     }
     std::cout << '\n';
     std::cout << 16;
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[2][i][0];
-        std::cout << grid[2][i][1];
+        std::cout << grid[i][8][0];
+        std::cout << grid[i][8][1];
     }
     std::cout << "\n  ";
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[3][i][0];
-        std::cout << grid[3][i][1];
+        std::cout << grid[i][7][0];
+        std::cout << grid[i][7][1];
     }
     std::cout << '\n';
     std::cout << 12;
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[4][i][0];
-        std::cout << grid[4][i][1];
+        std::cout << grid[i][6][0];
+        std::cout << grid[i][6][1];
     }
     std::cout << "\n  ";
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[5][i][0];
-        std::cout << grid[5][i][1];
+        std::cout << grid[i][5][0];
+        std::cout << grid[i][5][1];
     }
     std::cout << '\n';
     std::cout << 8 << ' ';
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[6][i][0];
-        std::cout << grid[6][i][1];
+        std::cout << grid[i][4][0];
+        std::cout << grid[i][4][1];
     }
     std::cout << "\n  ";
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[7][i][0];
-        std::cout << grid[7][i][1];
+        std::cout << grid[i][3][0];
+        std::cout << grid[i][3][1];
     }
     std::cout << '\n';
     std::cout << 4 << ' ';
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[8][i][0];
-        std::cout << grid[8][i][1];
+        std::cout << grid[i][2][0];
+        std::cout << grid[i][2][1];
     }
     std::cout << "\n  ";
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[9][i][0];
-        std::cout << grid[9][i][1];
+        std::cout << grid[i][1][0];
+        std::cout << grid[i][1][1];
     }
     std::cout << '\n';
     std::cout << 0 << ' ';
     for (int i = 0; i < size; i++)
     {
-        std::cout << grid[10][i][0];
-        std::cout << grid[10][i][1];
+        std::cout << grid[i][0][0];
+        std::cout << grid[i][0][1];
     }
     std::cout << "\n  ";
     std::cout << "0   4   8   12  16  20\n";

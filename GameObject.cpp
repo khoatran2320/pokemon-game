@@ -10,7 +10,7 @@ GameObject::GameObject(char in_code)
     display_code = in_code;
     id_num = 1;
     state = 0;
-    std::cout << "GameObject Constructed\n";
+    std::cout << "GameObject Constructed.\n";
 }
 GameObject::GameObject(Point2D in_loc, int in_id, char in_code)
 {
@@ -18,7 +18,7 @@ GameObject::GameObject(Point2D in_loc, int in_id, char in_code)
     id_num = in_id;
     location = in_loc;
     state = 0;
-    std::cout << "GameObject Constructed\n";
+    std::cout << "GameObject Constructed.\n";
 }
 Point2D GameObject::GetLocation()
 {
@@ -43,6 +43,14 @@ GameObject::~GameObject()
 }
 void GameObject::DrawSelf(char *ptr)
 {
-    *ptr = display_code;
-    *(ptr + 1) = id_num;
+    if (*ptr != '.' && *(ptr + 1) != ' ')
+    {
+        *ptr = '*';
+        *(ptr + 1) = ' ';
+    }
+    else
+    {
+        *ptr = display_code;
+        *(ptr + 1) = id_num + 48;
+    }
 }

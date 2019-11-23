@@ -42,7 +42,7 @@ Model::Model()
     num_centers = 2;
     num_gyms = 2;
 
-    std::cout << "Model default constructed\n";
+    std::cout << "Model default constructed.\n";
 }
 Model::~Model()
 {
@@ -153,6 +153,11 @@ bool Model::Update()
 
 void Model::Display(View &view)
 {
+
+    for (int i = 0; i < num_objects; i++)
+    {
+        view.Plot(object_ptrs[i]);
+    }
 }
 void Model::ShowStatus()
 {

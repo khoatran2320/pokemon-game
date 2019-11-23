@@ -5,8 +5,8 @@ void GameCommand::DoMoveCommand(Model &model, int pokemon_id, Point2D p1)
     if (model.GetPokemonPtr(pokemon_id))
     {
         Pokemon *pokemon = model.GetPokemonPtr(pokemon_id);
+        std::cout << "Moving " << pokemon->GetPokemonName() << " to gym " << p1 << '\n';
         pokemon->StartMoving(p1);
-        std::cout << "Moving " << pokemon->GetPokemonName() << " to " << p1 << '\n';
     }
     else
     {
@@ -21,7 +21,7 @@ void GameCommand::DoMoveToCenterCommand(Model &model, int pokemon_id, int center
         Pokemon *pokemon = model.GetPokemonPtr(pokemon_id);
         PokemonCenter *pokemon_center = model.GetPokemonCenterPtr(center_id);
         pokemon->StartMovingToCenter(pokemon_center);
-        std::cout << "Moving " << pokemon->GetPokemonName() << " to " << center_id << '\n';
+        std::cout << "Moving " << pokemon->GetPokemonName() << " to center " << center_id << '\n';
     }
     else
     {
@@ -63,7 +63,10 @@ void GameCommand::DoTrainInGymCommand(Model &model, int pokemon_id, unsigned int
     {
         Pokemon *pokemon = model.GetPokemonPtr(pokemon_id);
         pokemon->StartTraining(training_units);
-        std::cout << "Training " << pokemon->GetPokemonName() << '\n';
+        if (pokemon->GetState() == TRAINING_IN_GYM)
+        {
+            std::cout << "Training " << pokemon->GetPokemonName() << '\n';
+        }
     }
     else
     {
@@ -86,13 +89,13 @@ void GameCommand::DoRecoverInCenterCommand(Model &model, int pokemon_id, unsigne
 
 void GameCommand::DoGoCommand(Model &model, View &view)
 {
+    std::cout << "Advancing one tick.\n";
     model.Update();
     model.Display(view);
-    std::cout << "Advancing one tick.\n";
 }
 void GameCommand::DoRunCommand(Model &model, View &view)
 {
+    std::cout << "Advancing to next event.\n";
     model.Update();
     model.Display(view);
-    std::cout << "Advancing to next event.\n";
 }

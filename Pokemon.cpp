@@ -25,16 +25,16 @@ void Pokemon::StartMoving(Point2D dest)
     SetupDestination(dest);
     if (!GetDistanceBetween(location, dest))
     {
-        std::cout << display_code << ' ' << id_num << ": I'm already there. See?\n";
+        std::cout << display_code << id_num << ": I'm already there. See?\n";
     }
     else if (state == EXHAUSTED)
     {
-        std::cout << display_code << ' ' << id_num << ": I am exhausted. I may move but you cannot see me.\n";
+        std::cout << display_code << id_num << ": I am exhausted. I may move but you cannot see me.\n";
     }
     else
     {
         state = MOVING;
-        std::cout << display_code << ' ' << id_num << ": On my way.\n";
+        std::cout << display_code << id_num << ": On my way.\n";
     }
 }
 void Pokemon::StartMovingToCenter(PokemonCenter *center)
@@ -42,16 +42,16 @@ void Pokemon::StartMovingToCenter(PokemonCenter *center)
     SetupDestination(center->GetLocation());
     if (state == EXHAUSTED)
     {
-        std::cout << display_code << ' ' << id_num << ": I am exhausted so I can’t move to recover stamina…\n";
+        std::cout << display_code << id_num << ": I am exhausted so I can’t move to recover stamina…\n";
     }
     else if (!GetDistanceBetween(location, center->GetLocation()))
     {
-        std::cout << display_code << ' ' << id_num << ":  I am already at the Pokemon Center!\n";
+        std::cout << display_code << id_num << ":  I am already at the Pokemon Center!\n";
     }
     else
     {
         state = MOVING_TO_CENTER;
-        std::cout << display_code << ' ' << id_num << ":  on my way to center " << center->GetId() << '\n';
+        std::cout << display_code << id_num << ":  on my way to center " << center->GetId() << '\n';
     }
 }
 void Pokemon::StartMovingToGym(PokemonGym *gym)
@@ -59,35 +59,35 @@ void Pokemon::StartMovingToGym(PokemonGym *gym)
     SetupDestination(gym->GetLocation());
     if (state == EXHAUSTED)
     {
-        std::cout << display_code << ' ' << id_num << ": I am exhausted so I shouldn't be going to the gym.\n";
+        std::cout << display_code << id_num << ": I am exhausted so I shouldn't be going to the gym.\n";
     }
     else if (!GetDistanceBetween(location, gym->GetLocation()))
     {
-        std::cout << display_code << ' ' << id_num << ":  I am already at the Pokemon Gym!\n";
+        std::cout << display_code << id_num << ":  I am already at the Pokemon Gym!\n";
     }
     else
     {
         state = MOVING_TO_GYM;
-        std::cout << display_code << ' ' << id_num << ":  On my way to gym " << gym->GetId() << '\n';
+        std::cout << display_code << id_num << ":  On my way to gym " << gym->GetId() << '\n';
     }
 }
 void Pokemon::StartTraining(unsigned int num_training_units)
 {
     if (state == EXHAUSTED)
     {
-        std::cout << display_code << ' ' << id_num << ":  I am exhausted so no more training for me...\n";
+        std::cout << display_code << id_num << ":  I am exhausted so no more training for me...\n";
     }
     else if (state != IN_GYM)
     {
-        std::cout << display_code << ' ' << id_num << ":  I can only train in a Pokemon Gym!\n";
+        std::cout << display_code << id_num << ":  I can only train in a Pokemon Gym!\n";
     }
     else if (current_gym->IsBeaten())
     {
-        std::cout << display_code << ' ' << id_num << ":  Cannot train! This Pokemon Gym is already beaten!\n";
+        std::cout << display_code << id_num << ":  Cannot train! This Pokemon Gym is already beaten!\n";
     }
     else if (stamina >= current_gym->GetStaminaCost(num_training_units) && pokemon_dollars >= current_gym->GetDollarCost(num_training_units))
     {
-        std::cout << display_code << ' ' << id_num << ":  Not enough stamina and/or money for training\n";
+        std::cout << display_code << id_num << ":  Not enough stamina and/or money for training\n";
     }
     else
     {
@@ -100,26 +100,26 @@ void Pokemon::StartRecoveringStamina(unsigned int num_stamina_points)
 {
     if (state != IN_CENTER)
     {
-        std::cout << display_code << ' ' << id_num << ":   I can only recover stamina at a Pokemon Center!\n";
+        std::cout << display_code << id_num << ":   I can only recover stamina at a Pokemon Center!\n";
     }
     else if (current_center->GetNumStaminaPointsRemaining() < 1)
     {
-        std::cout << display_code << ' ' << id_num << ":   Cannot recover! No stamina points remaining in this Pokemon Center\n";
+        std::cout << display_code << id_num << ":   Cannot recover! No stamina points remaining in this Pokemon Center\n";
     }
     else if (pokemon_dollars < current_center->GetDollarCost(num_stamina_points))
     {
-        std::cout << display_code << ' ' << id_num << ":   Not enough money to recover stamina.\n";
+        std::cout << display_code << id_num << ":   Not enough money to recover stamina.\n";
     }
     else
     {
         state = RECOVERING_STAMINA;
-        std::cout << display_code << ' ' << id_num << " Started recovering " << num_stamina_points << " stamina point(s) at Pokemon Center " << current_center->GetId() << ".\n";
+        std::cout << display_code << id_num << " Started recovering " << num_stamina_points << " stamina point(s) at Pokemon Center " << current_center->GetId() << ".\n";
     }
 }
 void Pokemon::Stop()
 {
     state = STOPPED;
-    std::cout << display_code << ' ' << id_num << ":   Stopping...\n";
+    std::cout << display_code << id_num << ":   Stopping...\n";
 }
 bool Pokemon::IsExhausted()
 {
@@ -147,10 +147,6 @@ void Pokemon::ShowStatus()
 {
     std::cout << name << " status: ";
     GameObject::ShowStatus();
-    Update();
-}
-bool Pokemon::Update()
-{
     switch (state)
     {
     case STOPPED:
@@ -158,12 +154,55 @@ bool Pokemon::Update()
         std::cout << "\tStamina: " << stamina << '\n';
         std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
         std::cout << "\tExperience Points: " << experience_points << '\n';
-        return false;
+        break;
     case MOVING:
-        std::cout << " moving at a speed of " << speed << " to destination " << destination << " at each step of " << delta << '\n';
+        std::cout << " moving at a speed of " << speed << " to " << destination << " at each step of " << delta << '\n';
         std::cout << "\tStamina: " << stamina << '\n';
         std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
         std::cout << "\tExperience Points: " << experience_points << '\n';
+        break;
+    case MOVING_TO_CENTER:
+        std::cout << " heading to Pokemon Center " << current_center->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        break;
+
+    case MOVING_TO_GYM:
+        std::cout << " heading to Pokemon Gym " << current_gym->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        break;
+    case IN_CENTER:
+        std::cout << " inside Pokemon Center " << current_center->GetId() << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        break;
+    case IN_GYM:
+        std::cout << " inside Pokemon Gym " << current_gym->GetId() << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        break;
+    case TRAINING_IN_GYM:
+        std::cout << " training in Pokemon Gym " << current_gym->GetId() << '\n';
+        break;
+
+    case RECOVERING_STAMINA:
+        std::cout << " recovering in Pokemon Center " << current_center->GetId() << '\n';
+        break;
+    }
+}
+bool Pokemon::Update()
+{
+    switch (state)
+    {
+    case STOPPED:
+        return false;
+    case MOVING:
+
         UpdateLocation();
         if (!GetDistanceBetween(location, destination))
         {
@@ -175,10 +214,7 @@ bool Pokemon::Update()
             return false;
         }
     case MOVING_TO_CENTER:
-        std::cout << " heading to Pokemon Center " << current_center->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
-        std::cout << "\tStamina: " << stamina << '\n';
-        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "\tExperience Points: " << experience_points << '\n';
+
         if (!GetDistanceBetween(location, destination))
         {
             state = IN_CENTER;
@@ -189,10 +225,7 @@ bool Pokemon::Update()
             return false;
         }
     case MOVING_TO_GYM:
-        std::cout << " heading to Pokemon Gym " << current_gym->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
-        std::cout << "\tStamina: " << stamina << '\n';
-        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "\tExperience Points: " << experience_points << '\n';
+
         if (!GetDistanceBetween(location, destination))
         {
             state = IN_GYM;
@@ -203,19 +236,12 @@ bool Pokemon::Update()
             return false;
         }
     case IN_CENTER:
-        std::cout << " inside Pokemon Center " << current_center->GetId() << '\n';
-        std::cout << "\tStamina: " << stamina << '\n';
-        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "\tExperience Points: " << experience_points << '\n';
+
         return false;
     case IN_GYM:
-        std::cout << " inside Pokemon Gym " << current_gym->GetId() << '\n';
-        std::cout << "\tStamina: " << stamina << '\n';
-        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "\tExperience Points: " << experience_points << '\n';
         return false;
     case TRAINING_IN_GYM:
-        std::cout << " training in Pokemon Gym " << current_gym->GetId() << '\n';
+
         stamina -= current_gym->GetStaminaCost(training_units_to_buy);
         pokemon_dollars -= current_gym->GetDollarCost(training_units_to_buy);
         experience_points += current_gym->TrainPokemon(training_units_to_buy);
@@ -227,7 +253,7 @@ bool Pokemon::Update()
         state = IN_GYM;
         return true;
     case RECOVERING_STAMINA:
-        std::cout << " recovering in Pokemon Center " << current_center->GetId() << '\n';
+
         stamina += current_center->DistributeStamina(stamina_points_to_buy);
         pokemon_dollars -= current_center->GetDollarCost(stamina_points_to_buy);
         std::cout << "** " << name << " recovered " << current_center->DistributeStamina(stamina_points_to_buy) << " stamina point(s)! **\n";
@@ -240,10 +266,10 @@ bool Pokemon::Update()
 }
 bool Pokemon::UpdateLocation()
 {
-    if (fabs(destination.x - location.x) <= delta.x && fabs(destination.y - location.y) <= delta.y)
+    if (fabs(destination.x - location.x) <= delta.x || fabs(destination.y - location.y) <= delta.y)
     {
         location = destination;
-        std::cout << display_code << ' ' << id_num << " : I’m there!\n";
+        std::cout << display_code << id_num << ": I’m there!\n";
         return true;
     }
     else
@@ -251,9 +277,8 @@ bool Pokemon::UpdateLocation()
         location.x += delta.x;
         location.y += delta.y;
         stamina--;
-        srand(time(NULL));
-        pokemon_dollars += rand() % 10 + 1;
-        std::cout << display_code << ' ' << id_num << " : step...\n";
+        pokemon_dollars += GetRandomAmountOfPokemonDollars();
+        std::cout << display_code << id_num << ": step...\n";
         return false;
     }
 }
@@ -271,4 +296,10 @@ Pokemon::~Pokemon()
 std::string Pokemon::GetPokemonName()
 {
     return name;
+}
+
+double GetRandomAmountOfPokemonDollars()
+{
+    double randNum = rand() / ((double)RAND_MAX / 2);
+    return randNum;
 }

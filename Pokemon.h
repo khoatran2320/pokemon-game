@@ -59,4 +59,5 @@ private:
     Point2D destination;
     Vector2D delta;
 };
+double GetRandomAmountOfPokemonDollars();
 #endif
