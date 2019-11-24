@@ -145,6 +145,8 @@ int main()
                 model.Display(view);
                 view.Draw();
                 break;
+            case 'q':
+                break;
             default:
                 std::cout << "Please enter a valid command\n";
                 break;

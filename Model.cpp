@@ -115,11 +115,13 @@ bool Model::Update()
     if (gyms_beaten == num_gyms)
     {
         std::cout << "GAME OVER: You win! All Pokemon Gyms beaten\n";
+        Model::~Model();
         exit(EXIT_SUCCESS);
     }
     if (pokemon_exhausted == num_pokemon)
     {
         std::cout << "GAME OVER: You lose! All of your Pokemon are tired!\n";
+        Model::~Model();
         exit(EXIT_SUCCESS);
     }
 

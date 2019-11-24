@@ -74,12 +74,12 @@ void Pokemon::StartMovingToCenter(PokemonCenter *center)
     }
     else if (!GetDistanceBetween(location, center->GetLocation()))
     {
-        std::cout << display_code << id_num << ":  I am already at the Pokemon Center!\n";
+        std::cout << display_code << id_num << ": I am already at the Pokemon Center!\n";
     }
     else
     {
         state = MOVING_TO_CENTER;
-        std::cout << display_code << id_num << ":  On my way to center " << center->GetId() << '\n';
+        std::cout << display_code << id_num << ": On my way to center " << center->GetId() << '\n';
     }
 }
 void Pokemon::StartMovingToGym(PokemonGym *gym)
@@ -105,31 +105,31 @@ void Pokemon::StartMovingToGym(PokemonGym *gym)
     }
     else if (!GetDistanceBetween(location, gym->GetLocation()))
     {
-        std::cout << display_code << id_num << ":  I am already at the Pokemon Gym!\n";
+        std::cout << display_code << id_num << ": I am already at the Pokemon Gym!\n";
     }
     else
     {
         state = MOVING_TO_GYM;
-        std::cout << display_code << id_num << ":  On my way to gym " << gym->GetId() << '\n';
+        std::cout << display_code << id_num << ": On my way to gym " << gym->GetId() << '\n';
     }
 }
 void Pokemon::StartTraining(unsigned int num_training_units)
 {
     if (state == EXHAUSTED)
     {
-        std::cout << display_code << id_num << ":  I am exhausted so no more training for me...\n";
+        std::cout << display_code << id_num << ": I am exhausted so no more training for me...\n";
     }
     else if (state != IN_GYM)
     {
-        std::cout << display_code << id_num << ":  I can only train in a Pokemon Gym!\n";
+        std::cout << display_code << id_num << ": I can only train in a Pokemon Gym!\n";
     }
     else if (current_gym->IsBeaten())
     {
-        std::cout << display_code << id_num << ":  Cannot train! This Pokemon Gym is already beaten!\n";
+        std::cout << display_code << id_num << ": Cannot train! This Pokemon Gym is already beaten!\n";
     }
     else if (stamina <= current_gym->GetStaminaCost(num_training_units) && pokemon_dollars <= current_gym->GetDollarCost(num_training_units))
     {
-        std::cout << display_code << id_num << ":  Not enough stamina and/or money for training\n";
+        std::cout << display_code << id_num << ": Not enough stamina and/or money for training\n";
     }
     else
     {
@@ -142,15 +142,15 @@ void Pokemon::StartRecoveringStamina(unsigned int num_stamina_points)
 {
     if (state != IN_CENTER)
     {
-        std::cout << display_code << id_num << ":   I can only recover stamina at a Pokemon Center!\n";
+        std::cout << display_code << id_num << ": I can only recover stamina at a Pokemon Center!\n";
     }
     else if (current_center->GetNumStaminaPointsRemaining() < 1)
     {
-        std::cout << display_code << id_num << ":   Cannot recover! No stamina points remaining in this Pokemon Center\n";
+        std::cout << display_code << id_num << ": Cannot recover! No stamina points remaining in this Pokemon Center\n";
     }
     else if (pokemon_dollars < current_center->GetDollarCost(num_stamina_points))
     {
-        std::cout << display_code << id_num << ":   Not enough money to recover stamina.\n";
+        std::cout << display_code << id_num << ": Not enough money to recover stamina.\n";
     }
     else
     {

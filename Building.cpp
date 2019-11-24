@@ -40,3 +40,7 @@ bool Building::ShouldBeVisible()
 {
     return true;
 }
+Building::~Building()
+{
+    std::cout << "Building destructed.\n";
+}

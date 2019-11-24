@@ -15,5 +15,6 @@ public:
     void RemoveOnePokemon();
     virtual void ShowStatus();
     bool ShouldBeVisible();
+    ~Building();
 };
 #endif
