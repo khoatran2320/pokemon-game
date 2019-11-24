@@ -12,9 +12,11 @@ PokemonGym::PokemonGym()
     std::cout << "PokemonGym default constructed\n";
 }
 
-PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cost, double dollar_cost, unsigned int exp_points_per_unit, int in_Id, Point2D in_loc) : Building('G', in_Id, in_loc)
+PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cost, double dollar_cost, unsigned int exp_points_per_unit, int in_id, Point2D in_loc) : Building('G', in_id, in_loc)
 {
-
+    display_code = 'G';
+    location = in_loc;
+    id_num = in_id;
     max_number_of_training_units = max_training_units;
     stamina_cost_per_training_unit = stamina_cost;
     dollar_cost_per_training_unit = dollar_cost;
@@ -50,10 +52,12 @@ unsigned int PokemonGym::TrainPokemon(unsigned int training_units)
 {
     if (training_units > num_training_units_remaining)
     {
+        num_training_units_remaining = 0;
         return experience_points_per_training_unit * num_training_units_remaining;
     }
     else
     {
+        num_training_units_remaining -= training_units;
         return training_units * experience_points_per_training_unit;
     }
 }
@@ -90,7 +94,7 @@ void PokemonGym::ShowStatus()
     Building::ShowStatus();
     std::cout << "\tMax number of training units: " << max_number_of_training_units << '\n';
     std::cout << "\tStamina cost per training unit: " << stamina_cost_per_training_unit << '\n';
-    std::cout << "\tPokemon dollar per training unit: " << dollar_cost_per_training_unit << '\n';
+    std::cout << "\tPokemon dollar cost per training unit: " << dollar_cost_per_training_unit << '\n';
     std::cout << "\tExperience points per training unit: " << experience_points_per_training_unit << '\n';
     std::cout << '\t' << num_training_units_remaining << " training unit(s) are remaining for this gym" << '\n';
 }

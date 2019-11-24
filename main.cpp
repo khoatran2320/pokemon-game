@@ -15,6 +15,23 @@ double GetRandomAmountOfPokemonDollars();
 double GetDistanceBetween(Point2D p1, Point2D p2);
 int main()
 {
+    std::cout << "EC327: Introduction to Software Engineering\n";
+    std::cout << "Fall 2019\n";
+    std::cout << "Programming Assignment 3\n";
+
+    std::cout << "                                  ,'\\ \n";
+    std::cout << "   _.----.        ____         ,'  _\\   ___    ___     ____ \n";
+    std::cout << "_,-'       `.     |    |  /`.   \\,-'    |   \\  /   |   |    \\  |`. \n";
+    std::cout << "\\      __    \\    '-.  | /   `.  ___    |    \\/    |   '-.   \\ |  | \n";
+    std::cout << " \\.    \\ \\   |  __  |  |/    ,','_  `.  |          | __  |    \\|  | \n";
+    std::cout << "   \\    \\/   /,' _`.|      ,' / / / /   |          ,' _`.|     |  | \n";
+    std::cout << "    \\     ,-'/  /   \\    ,'   | \\/ / ,`.|         /  /   \\  |     | \n";
+    std::cout << "     \\    \\ |   \\_/  |   `-.  \\    `'  /|  |    ||   \\_/  | |\\    | \n";
+    std::cout << "      \\    \\ \\      /       `-.`.___,-' |  |\\  /| \\      /  | |   | \n";
+    std::cout << "       \\    \\ `.__,'|  |`-._    `|      |__| \\/ |  `.__,'|  | |   | \n";
+    std::cout << "        \\_.-'       |__|    `-._ |              '-.|     '-.| |   | \n";
+    std::cout << "                                `'                            '-._| \n";
+
     srand(time(NULL));
     Model model;
     GameCommand game_command;
@@ -35,9 +52,11 @@ int main()
     char command;
     while (command != 'q')
     {
+        std::cout << "Enter command: ";
         std::cin >> command;
         if (std::cin.fail())
         {
+            std::cout << "Please enter a valid command\n";
             std::cin.clear();
             std::cin.ignore(32767, '\n');
         }
@@ -61,6 +80,7 @@ int main()
                 if (std::cin >> id1 && std::cin >> id2)
                 {
                     game_command.DoMoveToGymCommand(model, id1, id2);
+                    view.Draw();
                     break;
                 }
                 else
@@ -71,6 +91,7 @@ int main()
                 if (std::cin >> id1 && std::cin >> id2)
                 {
                     game_command.DoMoveToCenterCommand(model, id1, id2);
+                    view.Draw();
                     break;
                 }
                 else
@@ -81,6 +102,7 @@ int main()
                 if (std::cin >> id1)
                 {
                     game_command.DoStopCommand(model, id1);
+                    view.Draw();
                     break;
                 }
                 else
@@ -91,6 +113,7 @@ int main()
                 if (std::cin >> id1 && std::cin >> stamina_amount)
                 {
                     game_command.DoRecoverInCenterCommand(model, id1, stamina_amount);
+                    view.Draw();
                     break;
                 }
                 else
@@ -101,6 +124,7 @@ int main()
                 if (std::cin >> id1 && std::cin >> unit_amount)
                 {
                     game_command.DoTrainInGymCommand(model, id1, unit_amount);
+                    view.Draw();
                     break;
                 }
                 else
@@ -115,23 +139,14 @@ int main()
                 view.Draw();
                 break;
             case 'x':
-                int temp = 0;
-                while (temp < 5)
-                {
-                    if (model.Update())
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        game_command.DoRunCommand(model, view);
-                        view.Clear();
-                        model.ShowStatus();
-                        model.Display(view);
-                        view.Draw();
-                        temp++;
-                    }
-                }
+                game_command.DoRunCommand(model, view);
+                view.Clear();
+                model.ShowStatus();
+                model.Display(view);
+                view.Draw();
+                break;
+            default:
+                std::cout << "Please enter a valid command\n";
                 break;
             }
         }

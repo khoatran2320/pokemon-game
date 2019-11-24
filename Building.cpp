@@ -6,9 +6,9 @@ Building::Building()
     pokemon_count = 0;
     std::cout << "Building default constructed.\n";
 }
-Building::Building(char in_code, int in_Id, Point2D in_loc) : GameObject(in_loc, in_Id, in_code)
+Building::Building(char in_code, int in_id, Point2D in_loc) : GameObject(in_loc, in_id, in_code)
 {
-    id_num = in_Id;
+    id_num = in_id;
     location = in_loc;
     display_code = in_code;
     pokemon_count = 0;

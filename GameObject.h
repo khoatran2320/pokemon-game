@@ -3,12 +3,6 @@
 #include "Point2D.h"
 class GameObject
 {
-protected:
-    Point2D location;
-    int id_num;
-    char display_code;
-    char state;
-
 public:
     GameObject();
     GameObject(char in_code);
@@ -21,5 +15,11 @@ public:
     virtual bool Update() = 0;
     virtual ~GameObject();
     void DrawSelf(char *ptr);
+
+protected:
+    Point2D location;
+    int id_num;
+    char display_code;
+    char state;
 };
 #endif

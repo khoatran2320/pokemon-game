@@ -50,18 +50,7 @@ Model::~Model()
     {
         delete object_ptrs[i];
     }
-    for (int i = 0; i < num_pokemon; i++)
-    {
-        delete pokemon_ptrs[i];
-    }
-    for (int i = 0; i < num_centers; i++)
-    {
-        delete center_ptrs[i];
-    }
-    for (int i = 0; i < num_gyms; i++)
-    {
-        delete gym_ptrs[i];
-    }
+
     std::cout << "Model destructed.\n";
 }
 
@@ -90,14 +79,7 @@ PokemonCenter *Model::GetPokemonCenterPtr(int id)
 }
 PokemonGym *Model::GetPokemonGymPtr(int id)
 {
-    for (int i = 0; i < num_gyms; i++)
-    {
-        if (gym_ptrs[i]->GetId() == id)
-        {
-            return gym_ptrs[i];
-        }
-    }
-    return 0;
+    return gym_ptrs[id - 1];
 }
 
 bool Model::Update()
@@ -106,7 +88,7 @@ bool Model::Update()
     int gyms_beaten = 0;
     int pokemon_exhausted = 0;
     bool temp = false;
-
+    //might be problematic here
     for (int i = 0; i < num_objects; i++)
     {
         if (object_ptrs[i]->Update() && !temp)
@@ -156,7 +138,10 @@ void Model::Display(View &view)
 
     for (int i = 0; i < num_objects; i++)
     {
-        view.Plot(object_ptrs[i]);
+        if (object_ptrs[i]->ShouldBeVisible())
+        {
+            view.Plot(object_ptrs[i]);
+        }
     }
 }
 void Model::ShowStatus()
