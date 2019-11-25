@@ -4,6 +4,7 @@ Model::Model()
 {
     time = 0;
 
+    //initialize all the locations for each object
     Point2D pokemon1InLocation(5, 1);
     Point2D pokemon2InLocation(10, 1);
     Point2D pokemonCenter1InLocation(1, 20);
@@ -14,6 +15,7 @@ Model::Model()
     std::string pokemon1InName = "Pikachu";
     std::string pokemon2InName = "Bulbasaur";
 
+    //making new objects
     Pokemon *pokemon1 = new Pokemon(pokemon1InName, 1, 'P', 2, pokemon1InLocation);
     Pokemon *pokemon2 = new Pokemon(pokemon2InName, 2, 'P', 1, pokemon2InLocation);
     PokemonCenter *pokemonCenter1 = new PokemonCenter(1, 1, 100, pokemonCenter1InLocation);
@@ -21,6 +23,7 @@ Model::Model()
     PokemonGym *pokemonGym1 = new PokemonGym(10, 1, 2, 3, 1, pokemonGym1InLocation);
     PokemonGym *pokemonGym2 = new PokemonGym(20, 5, 7.5, 8, 2, pokemonGym2InLocation);
 
+    //storing the objects in the appropriate arrays
     object_ptrs[0] = pokemon1;
     object_ptrs[1] = pokemon2;
     object_ptrs[2] = pokemonCenter1;
@@ -46,6 +49,7 @@ Model::Model()
 }
 Model::~Model()
 {
+    //delete all the objects
     for (int i = 0; i < num_objects; i++)
     {
         delete object_ptrs[i];
@@ -54,6 +58,7 @@ Model::~Model()
     std::cout << "Model destructed.\n";
 }
 
+//loop through the arrays and check the id
 Pokemon *Model::GetPokemonPtr(int id)
 {
     for (int i = 0; i < num_pokemon; i++)
@@ -88,7 +93,7 @@ bool Model::Update()
     int gyms_beaten = 0;
     int pokemon_exhausted = 0;
     bool temp = false;
-    //might be problematic here
+    //see if any object update returns true and set bool to temp if temp not already true
     for (int i = 0; i < num_objects; i++)
     {
         if (object_ptrs[i]->Update() && !temp)
@@ -96,7 +101,7 @@ bool Model::Update()
             temp = true;
         }
     }
-
+    //count the gyms beaten and pokemon exhausted to compare to total numbers to identify end game status
     for (int i = 0; i < num_gyms; i++)
     {
         if (gym_ptrs[i]->IsBeaten())
@@ -115,6 +120,7 @@ bool Model::Update()
     if (gyms_beaten == num_gyms)
     {
         std::cout << "GAME OVER: You win! All Pokemon Gyms beaten\n";
+        //delete all the objects in heap first
         Model::~Model();
         exit(EXIT_SUCCESS);
     }
@@ -140,6 +146,7 @@ void Model::Display(View &view)
 
     for (int i = 0; i < num_objects; i++)
     {
+        //plot all the game objects if they're visible
         if (object_ptrs[i]->ShouldBeVisible())
         {
             view.Plot(object_ptrs[i]);
@@ -148,6 +155,7 @@ void Model::Display(View &view)
 }
 void Model::ShowStatus()
 {
+    //show status for every game object
     std::cout << "Time: " << time << '\n';
     for (int i = 0; i < num_objects; i++)
     {

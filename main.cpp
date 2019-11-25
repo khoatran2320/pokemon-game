@@ -32,15 +32,21 @@ int main()
     std::cout << "        \\_.-'       |__|    `-._ |              '-.|     '-.| |   | \n";
     std::cout << "                                `'                            '-._| \n";
 
+    //set srand to time
     srand(time(NULL));
+
+    //initialize the classes
     Model model;
     GameCommand game_command;
     View view;
+
+    //showing initial status view
     view.Clear();
     model.ShowStatus();
     model.Display(view);
     view.Draw();
 
+    //variables for input
     int id1;
     int id2;
     int stamina_amount;
@@ -50,6 +56,8 @@ int main()
     double y;
 
     char command;
+
+    //looping for continuous inputs
     while (command != 'q')
     {
         std::cout << "Enter command: ";
@@ -60,6 +68,8 @@ int main()
             std::cin.clear();
             std::cin.ignore(32767, '\n');
         }
+
+        //switch the commands and call appropriate game commands. Certain commands also redraw the grid
         else
         {
             switch (command)
