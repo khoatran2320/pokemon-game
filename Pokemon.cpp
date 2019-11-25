@@ -58,15 +58,14 @@ void Pokemon::StartMovingToCenter(PokemonCenter *center)
         current_gym->RemoveOnePokemon();
         current_gym = NULL;
     }
-    else if (state == IN_CENTER)
+    if (state == IN_CENTER)
     {
         current_center->RemoveOnePokemon();
         current_center = NULL;
     }
-    else
-    {
-        current_center = center;
-    }
+
+    current_center = center;
+
     SetupDestination(center->GetLocation());
     if (state == EXHAUSTED)
     {
@@ -89,15 +88,14 @@ void Pokemon::StartMovingToGym(PokemonGym *gym)
         current_gym->RemoveOnePokemon();
         current_gym = NULL;
     }
-    else if (state == IN_CENTER)
+    if (state == IN_CENTER)
     {
         current_center->RemoveOnePokemon();
         current_center = NULL;
     }
-    else
-    {
-        current_gym = gym;
-    }
+
+    current_gym = gym;
+
     SetupDestination(gym->GetLocation());
     if (state == EXHAUSTED)
     {
@@ -155,6 +153,7 @@ void Pokemon::StartRecoveringStamina(unsigned int num_stamina_points)
     else
     {
         state = RECOVERING_STAMINA;
+        stamina_points_to_buy = num_stamina_points;
         std::cout << display_code << id_num << " Started recovering " << num_stamina_points << " stamina point(s) at Pokemon Center " << current_center->GetId() << ".\n";
     }
 }
@@ -302,13 +301,10 @@ bool Pokemon::Update()
         state = IN_GYM;
         return true;
     case RECOVERING_STAMINA:
-
-        stamina += current_center->DistributeStamina(stamina_points_to_buy);
+        temp = current_center->DistributeStamina(stamina_points_to_buy);
+        stamina += temp;
         pokemon_dollars -= current_center->GetDollarCost(stamina_points_to_buy);
-        std::cout << "** " << name << " recovered " << current_center->DistributeStamina(stamina_points_to_buy) << " stamina point(s)! **\n";
-        std::cout << "\tStamina: " << stamina << '\n';
-        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
-        std::cout << "\tExperience Points: " << experience_points << '\n';
+        std::cout << "** " << name << " recovered " << temp << " stamina point(s)! **\n";
         state = IN_CENTER;
         return true;
     }
