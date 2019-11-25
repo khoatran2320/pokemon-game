@@ -24,6 +24,7 @@ Pokemon::Pokemon(std::string in_name, int in_id, char in_code, unsigned int in_s
 }
 void Pokemon::StartMoving(Point2D dest)
 {
+    //removing pokemon if leaving from gym or center. Also getting rid of the current_center and the current_gym
     SetupDestination(dest);
     if (state == IN_CENTER)
     {
@@ -36,7 +37,7 @@ void Pokemon::StartMoving(Point2D dest)
         current_gym->RemoveOnePokemon();
         current_gym = NULL;
     }
-
+    //checking to see if pokemon is already at destination
     if (!GetDistanceBetween(location, dest))
     {
         std::cout << this->display_code << this->id_num << ": I'm already there. See?\n";
@@ -53,6 +54,7 @@ void Pokemon::StartMoving(Point2D dest)
 }
 void Pokemon::StartMovingToCenter(PokemonCenter *center)
 {
+    //same as above
     if (state == IN_GYM)
     {
         current_gym->RemoveOnePokemon();
@@ -63,7 +65,7 @@ void Pokemon::StartMovingToCenter(PokemonCenter *center)
         current_center->RemoveOnePokemon();
         current_center = NULL;
     }
-
+    //adding the current_center
     current_center = center;
 
     SetupDestination(center->GetLocation());
