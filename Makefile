@@ -1,4 +1,4 @@
-CC=g++ -g -stds=c++11
+CC=g++ -g -std=c++11
 
 OBJS=main.o Building.o Point2D.o Vector2D.o GameObject.o GameCommand.o PokemonCenter.o Model.o Pokemon.o PokemonGym.o View.o
 
