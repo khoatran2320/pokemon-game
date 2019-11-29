@@ -13,6 +13,17 @@ Pokemon::Pokemon(char in_code)
     display_code = in_code;
     std::cout << "Pokemon constructed.\n";
 }
+
+//update this
+Pokemon::Pokemon(std::string in_name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, char in_code, Point2D in_loc) : GameObject(in_loc, in_id, 'P')
+{
+    name = in_name;
+    speed = speed;
+    health = hp;
+    magical_damage = magic_dmg;
+    defense = def;
+}
+
 Pokemon::Pokemon(std::string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) : GameObject(in_loc, in_id, in_code)
 {
     location = in_loc;
@@ -309,6 +320,35 @@ bool Pokemon::Update()
         std::cout << "** " << name << " recovered " << temp << " stamina point(s)! **\n";
         state = IN_CENTER;
         return true;
+    case FAINTED:
+        return false;
+    case MOVING_TO_ARENA:
+        if (!GetDistanceBetween(location, destination))
+        {
+            state = IN_ARENA;
+            current_arena->AddOnePokemon();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    case BATTLE:
+        //this will be the step after ReadyBattle() is called
+        pokemon_dollars -= current_arena->GetDollarCost();
+        stamina -= current_arena->GetStaminaCost();
+        StartBattle();
+        if (health > 0)
+        {
+            health += store_health;
+            state = IN_ARENA;
+            target->IsAlive();
+        }
+        else
+        {
+            state = FAINTED;
+            target->IsAlive();
+        }
     }
 }
 bool Pokemon::UpdateLocation()
@@ -359,4 +399,52 @@ double GetRandomAmountOfPokemonDollars()
 {
     double randNum = rand() / ((double)RAND_MAX / 2);
     return randNum;
+}
+
+bool Pokemon::IsAlive()
+{
+    if (state == FAINTED)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+void Pokemon::TakeHit(double physical_damage, double magical_damage, double defense)
+{
+    int randNum = rand() % 2;
+
+    if (randNum == 0)
+    {
+        health -= (100.0 - defense) / 100 * physical_damage;
+    }
+    else
+    {
+        health -= (100.0 - defense) / 100 * magical_damage;
+    }
+}
+
+void Pokemon::ReadyBattle(Rival *in_target)
+{
+    if (state == IN_ARENA && current_arena->IsAbleToFight(pokemon_dollars, stamina) && !current_arena->IsBeaten() && in_target->IsAlive())
+    {
+        target = in_target;
+        state = BATTLE;
+    }
+    else
+    {
+        state = IN_ARENA;
+    }
+}
+//call in battle state
+bool Pokemon::StartBattle()
+{
+    while (health > 0 && target->get_health() > 0)
+    {
+        target->TakeHit(physical_damage, magical_damage, defense);
+        TakeHit(target->get_phys_dmg(), target->get_magic_dmg, target->get_defense);
+    }
 }

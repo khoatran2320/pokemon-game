@@ -8,6 +8,8 @@
 #include "Vector2D.h"
 #include "PokemonCenter.h"
 #include "PokemonGym.h"
+#include "Rival.h"
+#include "BattleArena.h"
 #include <cstdlib>
 enum PokemonStates
 {
@@ -19,7 +21,11 @@ enum PokemonStates
     MOVING_TO_GYM = 5,
     MOVING_TO_CENTER = 6,
     TRAINING_IN_GYM = 7,
-    RECOVERING_STAMINA = 8
+    RECOVERING_STAMINA = 8,
+    IN_ARENA = 9,
+    MOVING_TO_ARENA = 10,
+    BATTLE = 11,
+    FAINTED = 12
 };
 class Pokemon : public GameObject
 {
@@ -32,17 +38,32 @@ public:
     void StartMovingToGym(PokemonGym *gym);
     void StartTraining(unsigned int num_training_units);
     void StartRecoveringStamina(unsigned int num_stamina_points);
+    
     void Stop();
     bool IsExhausted();
     bool ShouldBeVisible();
     void ShowStatus();
     bool Update();
     std::string GetPokemonName();
+    Pokemon(std::string in_name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, char in_code, Point2D in_loc);
+    bool IsAlive();
+    void TakeHit(double physical_damage, double magical_damage, double defense);
+    void ReadyBattle(Rival *in_target);
+    bool StartBattle();
+
     ~Pokemon();
 
 protected:
     bool UpdateLocation();
     void SetupDestination(Point2D dest);
+    double health = 20;         //initial value is 20
+    double store_health;        //will be same as health and used to restore health if pokemon wins battle
+    double physical_damage = 5; //initial value is 5
+    double magical_damage = 4;  //initial value is 4
+    double defense = 15;        //parry percentage of attack
+    Rival *target;              //rival battle in arena
+    bool is_in_arena;           //returns true if in arena
+    BattleArena *current_arena;
 
 private:
     double speed;

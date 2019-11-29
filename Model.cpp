@@ -16,6 +16,7 @@ Model::Model()
     std::string pokemon2InName = "Bulbasaur";
 
     //making new objects
+    //add Rivals
     Pokemon *pokemon1 = new Pokemon(pokemon1InName, 1, 'P', 2, pokemon1InLocation);
     Pokemon *pokemon2 = new Pokemon(pokemon2InName, 2, 'P', 1, pokemon2InLocation);
     PokemonCenter *pokemonCenter1 = new PokemonCenter(1, 1, 100, pokemonCenter1InLocation);

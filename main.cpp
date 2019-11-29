@@ -155,6 +155,8 @@ int main()
                 model.Display(view);
                 view.Draw();
                 break;
+            case 'b':
+                //battle case set up
             case 'q':
                 break;
             default:
