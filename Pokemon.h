@@ -38,7 +38,7 @@ public:
     void StartMovingToGym(PokemonGym *gym);
     void StartTraining(unsigned int num_training_units);
     void StartRecoveringStamina(unsigned int num_stamina_points);
-    
+
     void Stop();
     bool IsExhausted();
     bool ShouldBeVisible();
@@ -57,7 +57,7 @@ protected:
     bool UpdateLocation();
     void SetupDestination(Point2D dest);
     double health = 20;         //initial value is 20
-    double store_health;        //will be same as health and used to restore health if pokemon wins battle
+    double store_health = 20;   //will be same as health and used to restore health if pokemon wins battle
     double physical_damage = 5; //initial value is 5
     double magical_damage = 4;  //initial value is 4
     double defense = 15;        //parry percentage of attack

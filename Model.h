@@ -6,6 +6,8 @@
 #include "PokemonGym.h"
 #include "View.h"
 #include "Point2D.h"
+#include "BattleArena.h"
+#include "Rival.h"
 #include <string>
 #include <stdlib.h>
 class Model
@@ -30,5 +32,9 @@ protected:
     int num_centers;
     PokemonGym *gym_ptrs[10];
     int num_gyms;
+    BattleArena *arena_ptrs[10];
+    int num_arenas;
+    Rival *rival_ptrs[10];
+    int num_rivals;
 };
 #endif

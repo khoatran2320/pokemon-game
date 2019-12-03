@@ -18,7 +18,7 @@ PokemonCenter::PokemonCenter(int in_id, double stamina_cost, unsigned int stamin
     num_stamina_points_remaining = stamina_capacity;
     dollar_cost_per_stamina_point = stamina_cost;
     state = STAMINA_POINTS_AVAILABLE;
-    std::cout << "PokemonCenter constructed\n";
+    std::cout << "PokemonCenter constructed.\n";
 }
 bool PokemonCenter::HasStaminaPoints()
 {

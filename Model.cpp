@@ -11,6 +11,7 @@ Model::Model()
     Point2D pokemonCenter2InLocation(10, 20);
     Point2D pokemonGym1InLocation(0, 0);
     Point2D pokemonGym2InLocation(5, 5);
+    Point2D battleArenaInLocation(15, 12);
 
     std::string pokemon1InName = "Pikachu";
     std::string pokemon2InName = "Bulbasaur";
@@ -23,14 +24,22 @@ Model::Model()
     PokemonCenter *pokemonCenter2 = new PokemonCenter(2, 2, 200, pokemonCenter2InLocation);
     PokemonGym *pokemonGym1 = new PokemonGym(10, 1, 2, 3, 1, pokemonGym1InLocation);
     PokemonGym *pokemonGym2 = new PokemonGym(20, 5, 7.5, 8, 2, pokemonGym2InLocation);
+    BattleArena *battleArena1 = new BattleArena(3, 3, 2.5, 1, battleArenaInLocation);
+    Rival *rival1 = new Rival("burhack", 2, 16, 3, 7.2, 20, 1, battleArenaInLocation);
+    Rival *rival2 = new Rival("mmark9", 3, 29, 4, 5.2, 12, 2, battleArenaInLocation);
+    Rival *rival3 = new Rival("Densmore(aka BigBoss)", 4, 41, 6, 8.2, 18, 3, battleArenaInLocation);
 
     //storing the objects in the appropriate arrays
     object_ptrs[0] = pokemon1;
     object_ptrs[1] = pokemon2;
-    object_ptrs[2] = pokemonCenter1;
-    object_ptrs[3] = pokemonCenter2;
-    object_ptrs[4] = pokemonGym1;
-    object_ptrs[5] = pokemonGym2;
+    object_ptrs[2] = rival1;
+    object_ptrs[3] = rival2;
+    object_ptrs[4] = rival3;
+    object_ptrs[5] = pokemonCenter1;
+    object_ptrs[6] = pokemonCenter2;
+    object_ptrs[7] = pokemonGym1;
+    object_ptrs[8] = pokemonGym2;
+    object_ptrs[9] = battleArena1;
 
     pokemon_ptrs[0] = pokemon1;
     pokemon_ptrs[1] = pokemon2;
@@ -41,11 +50,12 @@ Model::Model()
     gym_ptrs[0] = pokemonGym1;
     gym_ptrs[1] = pokemonGym2;
 
-    num_objects = 6;
+    num_objects = 10;
     num_pokemon = 2;
     num_centers = 2;
     num_gyms = 2;
-
+    num_rivals = 3;
+    num_arenas = 1;
     std::cout << "Model default constructed.\n";
 }
 Model::~Model()

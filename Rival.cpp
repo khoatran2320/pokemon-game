@@ -2,12 +2,13 @@
 
 Rival::Rival(std::string name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int id, Point2D in_loc) : GameObject(in_loc, id, 'R')
 {
-    name = name;
-    speed = speed;
-    health = hp;
-    physical_damage = physical_damage;
-    magical_damage = magic_dmg;
-    defense = def;
+    this->name = name;
+    this->speed = speed;
+    this->health = hp;
+    this->physical_damage = phys_dmg;
+    this->magical_damage = magic_dmg;
+    this->defense = def;
+    std::cout << "Rival constructed.\n";
 }
 void Rival::TakeHit(double physical_damage, double magical_damage, double defense)
 {
@@ -55,22 +56,45 @@ bool Rival::Update()
 
 void Rival::ShowStatus()
 {
-    std::cout << "Rival status: ";
+    std::cout << name << " status: ";
     GameObject::ShowStatus();
     if (state == ALIVE_RIVAL)
     {
         std::cout << " alive\n";
-        std::cout << "\thealth: " << health << '\n';
-        std::cout << "\tphysical damage: " << physical_damage << '\n';
-        std::cout << "\tmagic damage: " << magical_damage << '\n';
-        std::cout << "\tdefense: " << defense << '\n';
+        std::cout << "\tHealth: " << this->health << '\n';
+        std::cout << "\tPhysical Damage: " << this->physical_damage << '\n';
+        std::cout << "\tMagical Damage: " << this->magical_damage << '\n';
+        std::cout << "\tDefense: " << this->defense << '\n';
     }
     else
     {
         std::cout << " defeated\n";
-        std::cout << "\thealth: " << health << '\n';
-        std::cout << "\tphysical damage: " << physical_damage << '\n';
-        std::cout << "\tmagic damage: " << magical_damage << '\n';
-        std::cout << "\tdefense: " << defense << '\n';
+        std::cout << "\tHealth: " << this->health << '\n';
+        std::cout << "\tPhysical Damage: " << this->physical_damage << '\n';
+        std::cout << "\tMagical Damage: " << this->magical_damage << '\n';
+        std::cout << "\tDefense: " << this->defense << '\n';
+    }
+}
+bool Rival::IsAlive()
+{
+    if (state == FAINTED_RIVAL)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool Rival::ShouldBeVisible()
+{
+    if (IsAlive())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }

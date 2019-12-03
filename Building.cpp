@@ -4,7 +4,7 @@ Building::Building()
 {
     display_code = 'B';
     pokemon_count = 0;
-    std::cout << "Building default constructed.\n";
+    std::cout << "Building default constructed\n";
 }
 Building::Building(char in_code, int in_id, Point2D in_loc) : GameObject(in_loc, in_id, in_code)
 {
@@ -12,7 +12,7 @@ Building::Building(char in_code, int in_id, Point2D in_loc) : GameObject(in_loc,
     location = in_loc;
     display_code = in_code;
     pokemon_count = 0;
-    std::cout << "Building constructed.\n";
+    std::cout << "Building constructed\n";
 }
 void Building::AddOnePokemon()
 {
@@ -33,6 +33,7 @@ void Building::ShowStatus()
     {
         verb = "are";
     }
+
     std::cout << display_code << id_num << " located at " << location << '\n';
     std::cout << '\t' << pokemon_count << " pokemon " << verb << " in this building\n";
 }

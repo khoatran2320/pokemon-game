@@ -19,6 +19,7 @@ public:
     bool Update();
     bool IsAlive();
     void ShowStatus();
+    bool ShouldBeVisible();
 
 protected:
     double health = 20;
@@ -27,5 +28,9 @@ protected:
     double defense = 15;
     bool is_in_arena;
     BattleArena *current_arena;
+
+private:
+    double speed;
+    std::string name;
 };
 #endif

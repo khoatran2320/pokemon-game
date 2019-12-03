@@ -23,7 +23,7 @@ PokemonGym::PokemonGym(unsigned int max_training_units, unsigned int stamina_cos
     state = NOT_BEATEN;
     num_training_units_remaining = max_number_of_training_units;
     experience_points_per_training_unit = exp_points_per_unit;
-    std::cout << "PokemonGym constructed\n";
+    std::cout << "PokemonGym constructed.\n";
 }
 double PokemonGym::GetDollarCost(unsigned int unit_qty)
 {

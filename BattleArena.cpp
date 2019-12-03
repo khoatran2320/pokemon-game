@@ -18,6 +18,7 @@ BattleArena::BattleArena(unsigned int max_rivals, unsigned int stamina_cost, dou
     pokemon_count = 0;
     num_rivals_remaining = max_num_rivals;
     state = RIVALS_AVAILABLE;
+
     std::cout << "BattleArena constructed.\n";
 }
 unsigned int BattleArena::GetNumRivalsRemaining()
@@ -60,10 +61,9 @@ bool BattleArena::IsBeaten()
 
 void BattleArena::ShowStatus()
 {
-    GameObject::ShowStatus();
+    std::cout << "Battle Arena: ";
     Building::ShowStatus();
-    std::cout << "\tMax number of rivals: " << max_num_rivals << '\n';
     std::cout << "\tStamina cost per fight: " << stamina_cost_per_fight << '\n';
-    std::cout << "\tPokemon dollar per fight: " << dollar_cost_per_fight << '\n';
-    std::cout << num_rivals_remaining << " rival(s) are remaining for this arena" << '\n';
+    std::cout << "\tPokemon dollar cost per fight: " << dollar_cost_per_fight << '\n';
+    std::cout << '\t' << num_rivals_remaining << " rival(s) are remaining for this arena" << '\n';
 }
