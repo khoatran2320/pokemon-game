@@ -44,7 +44,7 @@ GameObject::~GameObject()
 void GameObject::DrawSelf(char *ptr)
 {
     //draw the display and id if there's not already a pokemon there, else draw the star
-    if (*ptr != '.' && *(ptr + 1) != ' ')
+    if ((*ptr != '.' && *(ptr + 1) != ' ') || (*ptr == '*' && *(ptr + 1) == ' '))
     {
         *ptr = '*';
         *(ptr + 1) = ' ';

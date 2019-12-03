@@ -44,11 +44,17 @@ Model::Model()
     pokemon_ptrs[0] = pokemon1;
     pokemon_ptrs[1] = pokemon2;
 
+    rival_ptrs[0] = rival1;
+    rival_ptrs[1] = rival2;
+    rival_ptrs[2] = rival3;
+
     center_ptrs[0] = pokemonCenter1;
     center_ptrs[1] = pokemonCenter2;
 
     gym_ptrs[0] = pokemonGym1;
     gym_ptrs[1] = pokemonGym2;
+
+    arena_ptrs[0] = battleArena1;
 
     num_objects = 10;
     num_pokemon = 2;
@@ -98,6 +104,14 @@ PokemonGym *Model::GetPokemonGymPtr(int id)
     return gym_ptrs[id - 1];
 }
 
+Rival *Model::GetRivalPtr(int id)
+{
+    return rival_ptrs[id - 1];
+}
+BattleArena *Model::GetBattleArenaPtr(int id)
+{
+    return arena_ptrs[id - 1];
+}
 bool Model::Update()
 {
     time++;

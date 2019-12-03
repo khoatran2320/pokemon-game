@@ -157,6 +157,27 @@ int main()
                 break;
             case 'b':
                 //battle case set up
+                if (std::cin >> id1 && std::cin >> id2)
+                {
+                    game_command.DoBattle(model, id1, id2);
+                    view.Draw();
+                    break;
+                }
+                else
+                {
+                    break;
+                }
+            case 'a':
+                if (std::cin >> id1 && std::cin >> id2)
+                {
+                    game_command.DoMoveToArenaCommand(model, id1, id2);
+                    view.Draw();
+                    break;
+                }
+                else
+                {
+                    break;
+                }
             case 'q':
                 break;
             default:

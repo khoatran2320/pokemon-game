@@ -249,6 +249,28 @@ void Pokemon::ShowStatus()
         std::cout << "\tMagical Damage: " << magical_damage << '\n';
         std::cout << "\tDefense: " << defense << '\n';
         break;
+
+    case MOVING_TO_ARENA:
+        std::cout << " heading to Battle Arena " << current_arena->GetId() << " at a speed of " << speed << " at each step of " << delta << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        std::cout << "\tHealth: " << health << '\n';
+        std::cout << "\tPhysical Damage: " << physical_damage << '\n';
+        std::cout << "\tMagical Damage: " << magical_damage << '\n';
+        std::cout << "\tDefense: " << defense << '\n';
+        break;
+
+    case IN_ARENA:
+        std::cout << " inside Battle Arena " << current_arena->GetId() << '\n';
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        std::cout << "\tHealth: " << health << '\n';
+        std::cout << "\tPhysical Damage: " << physical_damage << '\n';
+        std::cout << "\tMagical Damage: " << magical_damage << '\n';
+        std::cout << "\tDefense: " << defense << '\n';
+        break;
     case IN_CENTER:
         std::cout << " inside Pokemon Center " << current_center->GetId() << '\n';
         std::cout << "\tStamina: " << stamina << '\n';
@@ -285,6 +307,17 @@ void Pokemon::ShowStatus()
         std::cout << "\tPhysical Damage: " << physical_damage << '\n';
         std::cout << "\tMagical Damage: " << magical_damage << '\n';
         std::cout << "\tDefense: " << defense << '\n';
+        break;
+    case FAINTED:
+        std::cout << "Fainted\n";
+        std::cout << "\tStamina: " << stamina << '\n';
+        std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
+        std::cout << "\tExperience Points: " << experience_points << '\n';
+        std::cout << "\tHealth: " << health << '\n';
+        std::cout << "\tPhysical Damage: " << physical_damage << '\n';
+        std::cout << "\tMagical Damage: " << magical_damage << '\n';
+        std::cout << "\tDefense: " << defense << '\n';
+        break;
     }
 }
 bool Pokemon::Update()
@@ -356,6 +389,7 @@ bool Pokemon::Update()
     case FAINTED:
         return false;
     case MOVING_TO_ARENA:
+        UpdateLocation();
         if (!GetDistanceBetween(location, destination))
         {
             state = IN_ARENA;
@@ -479,5 +513,37 @@ bool Pokemon::StartBattle()
     {
         target->TakeHit(physical_damage, magical_damage, defense);
         TakeHit(target->get_phys_dmg(), target->get_magic_dmg(), target->get_defense());
+    }
+}
+
+void Pokemon::StartMovingToArena(BattleArena *arena)
+{
+    //same as above
+    if (state == IN_GYM)
+    {
+        current_gym->RemoveOnePokemon();
+        current_gym = NULL;
+    }
+    if (state == IN_CENTER)
+    {
+        current_center->RemoveOnePokemon();
+        current_center = NULL;
+    }
+    //adding the current_center
+    current_arena = arena;
+
+    SetupDestination(arena->GetLocation());
+    if (state == EXHAUSTED)
+    {
+        std::cout << display_code << id_num << ": I am exhausted so I can’t move to battle arena…\n";
+    }
+    else if (!GetDistanceBetween(location, arena->GetLocation()))
+    {
+        std::cout << display_code << id_num << ": I am already at the Battle Arena!\n";
+    }
+    else
+    {
+        state = MOVING_TO_ARENA;
+        std::cout << display_code << id_num << ": On my way to arena " << arena->GetId() << '\n';
     }
 }

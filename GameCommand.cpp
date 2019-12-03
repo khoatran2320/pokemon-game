@@ -22,7 +22,7 @@ void GameCommand::DoMoveToCenterCommand(Model &model, int pokemon_id, int center
         PokemonCenter *pokemon_center = model.GetPokemonCenterPtr(center_id);
         std::cout << "Moving " << pokemon->GetPokemonName() << " to center " << center_id << '\n';
         pokemon->StartMovingToCenter(pokemon_center);
-        }
+    }
     else
     {
         std::cout << "Error: Please enter a valid command!\n";
@@ -106,5 +106,35 @@ void GameCommand::DoRunCommand(Model &model, View &view)
         {
             model.Display(view);
         }
+    }
+}
+
+void GameCommand::DoBattle(Model &model, int pokemon_id, int rival_id)
+{
+    if (model.GetPokemonPtr(pokemon_id) && model.GetRivalPtr(rival_id))
+    {
+        Pokemon *pokemon = model.GetPokemonPtr(pokemon_id);
+        Rival *rival = model.GetRivalPtr(rival_id);
+
+        pokemon->ReadyBattle(rival);
+    }
+    else
+    {
+        std::cout << "Error: Please enter a valid command!\n";
+    }
+}
+
+void GameCommand::DoMoveToArenaCommand(Model &model, int pokemon_id, int arena_id)
+{
+    if (model.GetBattleArenaPtr(arena_id) && model.GetPokemonPtr(pokemon_id))
+    {
+        Pokemon *pokemon = model.GetPokemonPtr(pokemon_id);
+        BattleArena *arena = model.GetBattleArenaPtr(arena_id);
+        std::cout << "Moving " << pokemon->GetPokemonName() << " to arena " << arena_id << '\n';
+        pokemon->StartMovingToArena(arena);
+    }
+    else
+    {
+        std::cout << "Error: Please enter a valid command!\n";
     }
 }

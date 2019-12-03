@@ -36,6 +36,7 @@ public:
     void StartMoving(Point2D dest);
     void StartMovingToCenter(PokemonCenter *center);
     void StartMovingToGym(PokemonGym *gym);
+    void StartMovingToArena(BattleArena *arena);
     void StartTraining(unsigned int num_training_units);
     void StartRecoveringStamina(unsigned int num_stamina_points);
 

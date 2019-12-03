@@ -18,6 +18,8 @@ public:
     Pokemon *GetPokemonPtr(int id);
     PokemonCenter *GetPokemonCenterPtr(int id);
     PokemonGym *GetPokemonGymPtr(int id);
+    Rival *GetRivalPtr(int id);
+    BattleArena *GetBattleArenaPtr(int id);
     bool Update();
     void Display(View &view);
     void ShowStatus();
