@@ -496,7 +496,11 @@ void Pokemon::TakeHit(double physical_damage, double magical_damage, double defe
 
 void Pokemon::ReadyBattle(Rival *in_target)
 {
-    if (state == IN_ARENA && current_arena->IsAbleToFight(pokemon_dollars, stamina) && !current_arena->IsBeaten() && in_target->IsAlive())
+    if (state != IN_ARENA)
+    {
+        std::cout << display_code << id_num << ": I can only fight in a Battle Arena!\n";
+    }
+    else if (state == IN_ARENA && current_arena->IsAbleToFight(pokemon_dollars, stamina) && !current_arena->IsBeaten() && in_target->IsAlive())
     {
         target = in_target;
         state = BATTLE;

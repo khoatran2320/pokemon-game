@@ -98,3 +98,4 @@ bool Rival::ShouldBeVisible()
         return false;
     }
 }
+
