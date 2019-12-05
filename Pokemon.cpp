@@ -15,13 +15,15 @@ Pokemon::Pokemon(char in_code)
 }
 
 //update this
-Pokemon::Pokemon(std::string in_name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, char in_code, Point2D in_loc) : GameObject(in_loc, in_id, 'P')
+Pokemon::Pokemon(std::string in_name, double speed, double hp, double phys_dmg, double magic_dmg, double def, int in_id, char in_code, Point2D in_loc) : GameObject(in_loc, in_id, in_code)
 {
-    name = in_name;
-    speed = speed;
-    health = hp;
-    magical_damage = magic_dmg;
-    defense = def;
+    this->name = in_name;
+    this->speed = speed;
+    this->health = hp;
+    this->physical_damage = phys_dmg;
+    this->magical_damage = magic_dmg;
+    this->defense = def;
+    std::cout << "Pokemon constructed.\n";
 }
 
 Pokemon::Pokemon(std::string in_name, int in_id, char in_code, unsigned int in_speed, Point2D in_loc) : GameObject(in_loc, in_id, in_code)
@@ -407,6 +409,7 @@ bool Pokemon::Update()
         StartBattle();
         if (health > 0)
         {
+            std::cout << "Congrats Master, you defeated one rival!\n";
             health += store_health;
             state = IN_ARENA;
             target->IsAlive();
@@ -416,6 +419,8 @@ bool Pokemon::Update()
             state = FAINTED;
             target->IsAlive();
         }
+    case IN_ARENA:
+        return false;
     }
 }
 bool Pokemon::UpdateLocation()
@@ -483,14 +488,28 @@ bool Pokemon::IsAlive()
 void Pokemon::TakeHit(double physical_damage, double magical_damage, double defense)
 {
     int randNum = rand() % 2;
-
+    double pokemon_last_health = health;
     if (randNum == 0)
     {
+
         health -= (100.0 - defense) / 100 * physical_damage;
+
+        std::cout << target->GetRivalName() << " is attacking!\n";
+        std::cout << name << ": Physical damage hurts, Master!\n";
+        std::cout << "Damage Taken: " << pokemon_last_health - health << '\n';
+        std::cout << "Health Remaining: " << health << '\n';
+        std::cout << "*******\n";
+        pokemon_last_health = health;
     }
     else
     {
         health -= (100.0 - defense) / 100 * magical_damage;
+        std::cout << target->GetRivalName() << " is attacking!\n";
+        std::cout << name << ": It is magic, Master!\n";
+        std::cout << "Damage Taken: " << pokemon_last_health - health << '\n';
+        std::cout << "Health Remaining: " << health << '\n';
+        std::cout << "*******\n";
+        pokemon_last_health = health;
     }
 }
 
@@ -504,6 +523,7 @@ void Pokemon::ReadyBattle(Rival *in_target)
     {
         target = in_target;
         state = BATTLE;
+        std::cout << display_code << id_num << ": Getting ready for the battle\n";
     }
     else
     {
@@ -513,10 +533,12 @@ void Pokemon::ReadyBattle(Rival *in_target)
 //call in battle state
 bool Pokemon::StartBattle()
 {
+
     while (health > 0 && target->get_health() > 0)
     {
-        target->TakeHit(physical_damage, magical_damage, defense);
         TakeHit(target->get_phys_dmg(), target->get_magic_dmg(), target->get_defense());
+
+        target->TakeHit(physical_damage, magical_damage, defense);
     }
 }
 

@@ -95,16 +95,15 @@ void GameCommand::DoGoCommand(Model &model, View &view)
 }
 void GameCommand::DoRunCommand(Model &model, View &view)
 {
+    bool temp = false;
     std::cout << "Advancing to next event.\n";
     for (int i = 0; i < 5; i++)
     {
-        if (model.Update())
+        temp = model.Update();
+        model.Display(view);
+        if (temp)
         {
-            break;
-        }
-        else
-        {
-            model.Display(view);
+            return;
         }
     }
 }
@@ -113,9 +112,9 @@ void GameCommand::DoBattle(Model &model, int pokemon_id, int rival_id)
 {
     if (model.GetPokemonPtr(pokemon_id) && model.GetRivalPtr(rival_id))
     {
+
         Pokemon *pokemon = model.GetPokemonPtr(pokemon_id);
         Rival *rival = model.GetRivalPtr(rival_id);
-
         pokemon->ReadyBattle(rival);
     }
     else

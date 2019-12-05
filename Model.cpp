@@ -18,8 +18,8 @@ Model::Model()
 
     //making new objects
     //add Rivals
-    Pokemon *pokemon1 = new Pokemon(pokemon1InName, 1, 'P', 2, pokemon1InLocation);
-    Pokemon *pokemon2 = new Pokemon(pokemon2InName, 2, 'P', 1, pokemon2InLocation);
+    Pokemon *pokemon1 = new Pokemon(pokemon1InName, 2, 23, 3, 6, 12, 1, 'P', pokemon1InLocation);
+    Pokemon *pokemon2 = new Pokemon(pokemon2InName, 1, 26, 4, 3.7, 16, 2, 'P', pokemon2InLocation);
     PokemonCenter *pokemonCenter1 = new PokemonCenter(1, 1, 100, pokemonCenter1InLocation);
     PokemonCenter *pokemonCenter2 = new PokemonCenter(2, 2, 200, pokemonCenter2InLocation);
     PokemonGym *pokemonGym1 = new PokemonGym(10, 1, 2, 3, 1, pokemonGym1InLocation);
@@ -227,14 +227,7 @@ bool Model::Update()
         exit(EXIT_SUCCESS);
     }
 
-    if (temp)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return temp;
 }
 
 void Model::Display(View &view)

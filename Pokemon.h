@@ -57,20 +57,20 @@ public:
 protected:
     bool UpdateLocation();
     void SetupDestination(Point2D dest);
-    double health = 20;         //initial value is 20
-    double store_health = 20;   //will be same as health and used to restore health if pokemon wins battle
-    double physical_damage = 5; //initial value is 5
-    double magical_damage = 4;  //initial value is 4
-    double defense = 15;        //parry percentage of attack
-    Rival *target;              //rival battle in arena
-    bool is_in_arena;           //returns true if in arena
+    double health = 20;           //initial value is 20
+    double store_health = health; //will be same as health and used to restore health if pokemon wins battle
+    double physical_damage = 5;   //initial value is 5
+    double magical_damage = 4;    //initial value is 4
+    double defense = 15;          //parry percentage of attack
+    Rival *target;                //rival battle in arena
+    bool is_in_arena;             //returns true if in arena
     BattleArena *current_arena;
 
 private:
     double speed;
     bool is_in_gym;
     bool is_in_center;
-    unsigned int stamina;
+    unsigned int stamina = 20;
     unsigned int experience_points;
     double pokemon_dollars;
     unsigned int training_units_to_buy;

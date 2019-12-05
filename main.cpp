@@ -17,7 +17,7 @@ int main()
 {
     std::cout << "EC327: Introduction to Software Engineering\n";
     std::cout << "Fall 2019\n";
-    std::cout << "Programming Assignment 3\n";
+    std::cout << "Programming Assignment 4\n";
 
     std::cout << "                                  ,'\\ \n";
     std::cout << "   _.----.        ____         ,'  _\\   ___    ___     ____ \n";

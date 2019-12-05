@@ -13,14 +13,28 @@ Rival::Rival(std::string name, double speed, double hp, double phys_dmg, double 
 void Rival::TakeHit(double physical_damage, double magical_damage, double defense)
 {
     int randNum = rand() % 2;
-
+    double rival_last_health = health;
     if (randNum == 0)
     {
+
         health -= (100.0 - defense) / 100 * physical_damage;
+
+        std::cout << name << ": I'm being attacked\n";
+        std::cout << name << ": Aaagh, no physical pain no gain!\n";
+        std::cout << "Damage Taken: " << rival_last_health - health << '\n';
+        std::cout << "Health Remaining: " << health << '\n';
+        std::cout << "*******\n";
+        rival_last_health = health;
     }
     else
     {
         health -= (100.0 - defense) / 100 * magical_damage;
+        std::cout << name << ": I'm being attacked\n";
+        std::cout << name << ": Ouch, I don't believe magic!\n";
+        std::cout << "Damage Taken: " << rival_last_health - health << '\n';
+        std::cout << "Health Remaining: " << health << '\n';
+        std::cout << "*******\n";
+        rival_last_health = health;
     }
 }
 double Rival::get_phys_dmg()

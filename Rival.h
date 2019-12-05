@@ -17,10 +17,12 @@ public:
     double get_magic_dmg();
     double get_defense();
     double get_health();
+
     bool Update();
     bool IsAlive();
     void ShowStatus();
     bool ShouldBeVisible();
+
     std::string GetRivalName();
 
 protected:
@@ -29,6 +31,7 @@ protected:
     double magical_damage = 4;
     double defense = 15;
     bool is_in_arena;
+
     BattleArena *current_arena;
 
 private:
