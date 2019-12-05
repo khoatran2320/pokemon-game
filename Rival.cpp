@@ -99,3 +99,7 @@ bool Rival::ShouldBeVisible()
     }
 }
 
+std::string Rival::GetRivalName()
+{
+    return name;
+}

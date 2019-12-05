@@ -2,6 +2,7 @@
 #define RIVAL_H
 #include "GameObject.h"
 #include "BattleArena.h"
+#include <string>
 enum RivalStates
 {
     ALIVE_RIVAL = 0,
@@ -20,6 +21,7 @@ public:
     bool IsAlive();
     void ShowStatus();
     bool ShouldBeVisible();
+    std::string GetRivalName();
 
 protected:
     double health = 20;
