@@ -121,32 +121,36 @@ int main()
                 break;
 
             case 'g':
-
-                game_command.DoMoveToGymCommand(model, get_int(), get_int());
+                id1 = get_int();
+                id2 = get_int();
+                game_command.DoMoveToGymCommand(model, id1, id2);
                 view.Draw();
                 break;
 
             case 'c':
-
-                game_command.DoMoveToCenterCommand(model, get_int(), get_int());
+                id1 = get_int();
+                id2 = get_int();
+                game_command.DoMoveToCenterCommand(model, id1, id2);
                 view.Draw();
                 break;
 
             case 's':
-
-                game_command.DoStopCommand(model, get_int());
+                id1 = get_int();
+                game_command.DoStopCommand(model, id1);
                 view.Draw();
                 break;
 
             case 'r':
-
-                game_command.DoRecoverInCenterCommand(model, get_int(), get_int());
+                id1 = get_int();
+                stamina_amount = get_int();
+                game_command.DoRecoverInCenterCommand(model, id1, stamina_amount);
                 view.Draw();
                 break;
 
             case 't':
-
-                game_command.DoTrainInGymCommand(model, get_int(), get_int());
+                id1 = get_int();
+                unit_amount = get_int();
+                game_command.DoTrainInGymCommand(model, get_int(), unit_amount);
                 view.Draw();
                 break;
 
@@ -166,14 +170,16 @@ int main()
                 break;
             case 'b':
                 //battle case set up
-
-                game_command.DoBattle(model, get_int(), get_int());
+                id1 = get_int();
+                id2 = get_int();
+                game_command.DoBattle(model, id1, id2);
                 view.Draw();
                 break;
 
             case 'a':
-
-                game_command.DoMoveToArenaCommand(model, get_int(), get_int());
+                id1 = get_int();
+                id2 = get_int();
+                game_command.DoMoveToArenaCommand(model, id1, id2);
                 view.Draw();
                 break;
 
