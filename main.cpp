@@ -187,6 +187,7 @@ int main()
                 x = get_double();
                 y = get_double();
                 model.NewCommand(type, id1, Point2D(x, y));
+                view.Draw();
             case 'q':
                 break;
             default:
