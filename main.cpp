@@ -1,3 +1,7 @@
+#include <iostream>
+#include <ios>
+#include <ctime>
+#include <limits>
 #include "Building.h"
 #include "GameCommand.h"
 #include "GameObject.h"
@@ -8,11 +12,49 @@
 #include "PokemonGym.h"
 #include "Vector2D.h"
 #include "View.h"
-#include <iostream>
-#include <ctime>
+#include "Input_Handling.h"
 
 double GetRandomAmountOfPokemonDollars();
 double GetDistanceBetween(Point2D p1, Point2D p2);
+
+//functions for input
+char get_command()
+{
+    char a;
+    if (!(std::cin >> a))
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+        throw Invalid_Input("Please enter an a single character");
+    }
+
+    return a;
+}
+int get_int()
+{
+    int a;
+    if (!(std::cin >> a))
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw Invalid_Input("Please enter an integer");
+    }
+    return a;
+}
+
+double get_double()
+{
+    double a;
+    if (!(std::cin >> a))
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        throw Invalid_Input("Please enter a real number");
+    }
+    return a;
+}
+
 int main()
 {
     std::cout << "EC327: Introduction to Software Engineering\n";
@@ -46,8 +88,9 @@ int main()
     model.Display(view);
     view.Draw();
 
-    //variables for input
+    // //functions for input
     int id1;
+
     int id2;
     int stamina_amount;
     int unit_amount;
@@ -60,87 +103,50 @@ int main()
     //looping for continuous inputs
     while (command != 'q')
     {
-        std::cout << "Enter command: ";
-        std::cin >> command;
-        if (std::cin.fail())
-        {
-            std::cout << "Please enter a valid command\n";
-            std::cin.clear();
-            std::cin.ignore(32767, '\n');
-        }
 
-        //switch the commands and call appropriate game commands. Certain commands also redraw the grid
-        else
+        std::cout << "Enter command: ";
+        try
         {
+            command = get_command();
+            // try
+            // {
             switch (command)
             {
             case 'm':
-                if (std::cin >> id1 && std::cin >> x && std::cin >> y)
-                {
-                    Point2D location(x, y);
-                    game_command.DoMoveCommand(model, id1, location);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+                game_command.DoMoveCommand(model, get_int(), Point2D(get_double(), get_double()));
+                view.Draw();
+                break;
+
             case 'g':
-                if (std::cin >> id1 && std::cin >> id2)
-                {
-                    game_command.DoMoveToGymCommand(model, id1, id2);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoMoveToGymCommand(model, get_int(), get_int());
+                view.Draw();
+                break;
+
             case 'c':
-                if (std::cin >> id1 && std::cin >> id2)
-                {
-                    game_command.DoMoveToCenterCommand(model, id1, id2);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoMoveToCenterCommand(model, get_int(), get_int());
+                view.Draw();
+                break;
+
             case 's':
-                if (std::cin >> id1)
-                {
-                    game_command.DoStopCommand(model, id1);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoStopCommand(model, get_int());
+                view.Draw();
+                break;
+
             case 'r':
-                if (std::cin >> id1 && std::cin >> stamina_amount)
-                {
-                    game_command.DoRecoverInCenterCommand(model, id1, stamina_amount);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoRecoverInCenterCommand(model, get_int(), get_int());
+                view.Draw();
+                break;
+
             case 't':
-                if (std::cin >> id1 && std::cin >> unit_amount)
-                {
-                    game_command.DoTrainInGymCommand(model, id1, unit_amount);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoTrainInGymCommand(model, get_int(), get_int());
+                view.Draw();
+                break;
+
             case 'v':
                 game_command.DoGoCommand(model, view);
                 view.Clear();
@@ -157,34 +163,36 @@ int main()
                 break;
             case 'b':
                 //battle case set up
-                if (std::cin >> id1 && std::cin >> id2)
-                {
-                    game_command.DoBattle(model, id1, id2);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoBattle(model, get_int(), get_int());
+                view.Draw();
+                break;
+
             case 'a':
-                if (std::cin >> id1 && std::cin >> id2)
-                {
-                    game_command.DoMoveToArenaCommand(model, id1, id2);
-                    view.Draw();
-                    break;
-                }
-                else
-                {
-                    break;
-                }
+
+                game_command.DoMoveToArenaCommand(model, get_int(), get_int());
+                view.Draw();
+                break;
+
             case 'q':
                 break;
             default:
                 std::cout << "Please enter a valid command\n";
                 break;
             }
+            // }
+            // catch (Invalid_Input &except)
+            // {
+            //     std::cout << "Invalid input - " << except.msg_ptr << '\n';
+            // }
         }
+        catch (Invalid_Input &except)
+        {
+            std::cout << "Invalid input - " << except.msg_ptr << '\n';
+            // std::cin.clear();
+            // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+        //switch the commands and call appropriate game commands. Certain commands also redraw the grid
     }
     return 0;
 }

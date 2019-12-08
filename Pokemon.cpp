@@ -311,7 +311,7 @@ void Pokemon::ShowStatus()
         std::cout << "\tDefense: " << defense << '\n';
         break;
     case FAINTED:
-        std::cout << "Fainted\n";
+        std::cout << " Fainted\n";
         std::cout << "\tStamina: " << stamina << '\n';
         std::cout << "\tPokemon Dollars: " << pokemon_dollars << '\n';
         std::cout << "\tExperience Points: " << experience_points << '\n';
@@ -416,6 +416,7 @@ bool Pokemon::Update()
         }
         else
         {
+            std::cout << "Sorry Master, I have let you down!\n";
             state = FAINTED;
             target->IsAlive();
         }
@@ -536,7 +537,14 @@ bool Pokemon::StartBattle()
 
     while (health > 0 && target->get_health() > 0)
     {
-        TakeHit(target->get_phys_dmg(), target->get_magic_dmg(), target->get_defense());
+        if (health > 0)
+        {
+            TakeHit(target->get_phys_dmg(), target->get_magic_dmg(), target->get_defense());
+        }
+        else
+        {
+            break;
+        }
 
         target->TakeHit(physical_damage, magical_damage, defense);
     }
