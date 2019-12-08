@@ -113,7 +113,10 @@ int main()
             switch (command)
             {
             case 'm':
-                game_command.DoMoveCommand(model, get_int(), Point2D(get_double(), get_double()));
+                id1 = get_int();
+                x = get_double();
+                y = get_double();
+                game_command.DoMoveCommand(model, id1, Point2D(x, y));
                 view.Draw();
                 break;
 
