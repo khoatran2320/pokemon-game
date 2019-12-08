@@ -12,6 +12,7 @@
 #include "Point2D.h"
 #include "BattleArena.h"
 #include "Rival.h"
+#include "Input_Handling.h"
 
 class Model
 {
@@ -23,6 +24,7 @@ public:
     PokemonGym *GetPokemonGymPtr(int id);
     Rival *GetRivalPtr(int id);
     BattleArena *GetBattleArenaPtr(int id);
+    void NewCommand(char type, int id, Point2D location);
     bool Update();
     void Display(View &view);
     void ShowStatus();

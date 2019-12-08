@@ -251,3 +251,84 @@ void Model::ShowStatus()
         (*object_it)->ShowStatus();
     }
 }
+
+void Model::NewCommand(char type, int id, Point2D location)
+{
+    if (id < 10)
+    {
+        switch (type)
+        {
+        case 'g':
+        {
+            for (gym_it = gym_ptrs.begin(); gym_it != gym_ptrs.end(); ++gym_it)
+            {
+                if ((*gym_it)->GetId() == id)
+                {
+                    throw Invalid_Input("A pokemon gym with the same ID already exists!");
+                }
+            }
+            PokemonGym *newGym = new PokemonGym(15, 1, 2, 4, id, location);
+            gym_ptrs.push_back(newGym);
+            active_ptrs.push_back(newGym);
+            object_ptrs.push_back(newGym);
+
+            break;
+        }
+        case 'c':
+        {
+            for (center_it = center_ptrs.begin(); center_it != center_ptrs.end(); ++center_it)
+            {
+                if ((*center_it)->GetId() == id)
+                {
+                    throw Invalid_Input("A pokemon center with the same ID already exists!");
+                }
+            }
+            PokemonCenter *newCenter = new PokemonCenter(id, 1, 100, location);
+            center_ptrs.push_back(newCenter);
+            active_ptrs.push_back(newCenter);
+            object_ptrs.push_back(newCenter);
+
+            break;
+        }
+        case 'p':
+        {
+            for (pokemon_it = pokemon_ptrs.begin(); pokemon_it != pokemon_ptrs.end(); ++pokemon_it)
+            {
+                if ((*pokemon_it)->GetId() == id)
+                {
+                    throw Invalid_Input("A pokemon with the same ID already exists!");
+                }
+            }
+            Pokemon *newPokemon = new Pokemon("New Pokemon", 2, 22, 6, 5.7, 11, id, 'P', location);
+            pokemon_ptrs.push_back(newPokemon);
+            active_ptrs.push_back(newPokemon);
+            object_ptrs.push_back(newPokemon);
+
+            break;
+        }
+        case 'r':
+        {
+            for (rival_it = rival_ptrs.begin(); rival_it != rival_ptrs.end(); ++rival_it)
+            {
+                if ((*rival_it)->GetId() == id)
+                {
+                    throw Invalid_Input("A rival with the same ID already exists!");
+                }
+            }
+            Rival *newRival = new Rival("New Rival", 2, 18, 4, 8.2, 19, id, location);
+            rival_ptrs.push_back(newRival);
+            active_ptrs.push_back(newRival);
+            object_ptrs.push_back(newRival);
+            break;
+        }
+        default:
+            throw Invalid_Input("Please enter a valid type");
+            break;
+        }
+    }
+    else
+    {
+        throw Invalid_Input("Please enter an ID number less than 10");
+    }
+    return;
+};

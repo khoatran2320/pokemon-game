@@ -98,7 +98,7 @@ int main()
     double y;
 
     char command;
-
+    char type;
     //looping for continuous inputs
     while (command != 'q')
     {
@@ -181,11 +181,16 @@ int main()
                 game_command.DoMoveToArenaCommand(model, id1, id2);
                 view.Draw();
                 break;
-
+            case 'n':
+                type = get_command();
+                id1 = get_int();
+                x = get_double();
+                y = get_double();
+                model.NewCommand(type, id1, Point2D(x, y));
             case 'q':
                 break;
             default:
-                std::cout << "Please enter a valid command\n";
+                throw Invalid_Input("Please enter a valid command");
                 break;
             }
             // }
