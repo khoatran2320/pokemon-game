@@ -1,7 +1,7 @@
 #include <iostream>
-#include <ios>
+
 #include <ctime>
-#include <limits>
+
 #include "Building.h"
 #include "GameCommand.h"
 #include "GameObject.h"
@@ -24,7 +24,7 @@ char get_command()
     if (!(std::cin >> a))
     {
         std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.ignore(32767, '\n');
 
         throw Invalid_Input("Please enter an a single character");
     }
@@ -37,7 +37,7 @@ int get_int()
     if (!(std::cin >> a))
     {
         std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.ignore(32767, '\n');
         throw Invalid_Input("Please enter an integer");
     }
     return a;
@@ -49,7 +49,7 @@ double get_double()
     if (!(std::cin >> a))
     {
         std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.ignore(32767, '\n');
         throw Invalid_Input("Please enter a real number");
     }
     return a;
@@ -88,9 +88,8 @@ int main()
     model.Display(view);
     view.Draw();
 
-    // //functions for input
+    //variables for input
     int id1;
-
     int id2;
     int stamina_amount;
     int unit_amount;
@@ -203,6 +202,7 @@ int main()
         }
         //switch the commands and call appropriate game commands. Certain commands also redraw the grid
     }
+    std::cout << "Terminating program.\n";
     return 0;
 }
 

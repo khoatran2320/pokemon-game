@@ -19,6 +19,7 @@ public:
     bool Update();
     bool IsBeaten();
     void ShowStatus();
+
     ~PokemonGym();
 
 private:

@@ -179,8 +179,7 @@ bool Model::Update()
 
             active_ptrs.remove(*pokemon_it);
 
-            std::cout
-                << "Dead " << (*pokemon_it)->GetPokemonName() << " removed\n";
+            std::cout << "Dead " << (*pokemon_it)->GetPokemonName() << " removed\n";
         }
     }
     for (rival_it = rival_ptrs.begin(); rival_it != rival_ptrs.end(); ++rival_it)

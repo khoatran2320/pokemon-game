@@ -13,6 +13,7 @@ public:
     virtual void ShowStatus();
     virtual bool ShouldBeVisible() = 0;
     virtual bool Update() = 0;
+
     virtual ~GameObject();
     void DrawSelf(char *ptr);
 
