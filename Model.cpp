@@ -65,6 +65,7 @@ Model::Model()
 
     pokemon_ptrs.push_back(pokemon1);
     pokemon_ptrs.push_back(pokemon2);
+
     // pokemon_ptrs[0] = pokemon1;
     // pokemon_ptrs[1] = pokemon2;
 

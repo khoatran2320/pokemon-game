@@ -63,6 +63,7 @@ protected:
     // Rival *rival_ptrs[10];
     std::list<Rival *> rival_ptrs;
     std::list<Rival *>::iterator rival_it;
+
     // int num_rivals;
 };
 #endif
